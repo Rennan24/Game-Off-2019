@@ -538,7 +538,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 802349502}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalPosition: {x: 0.683, y: 0.738, z: 0}
   m_LocalScale: {x: 1.5, y: 1.5, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
@@ -828,7 +828,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1452146487}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalPosition: {x: -0.009, y: 0, z: 0}
   m_LocalScale: {x: 2, y: 2, z: 1}
   m_Children: []
   m_Father: {fileID: 1425955933}
@@ -5642,10 +5642,15 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 2736464638290828668, guid: 0f03bf8b0ca66f040a73a8550696f224,
+    - target: {fileID: 3868542479559832842, guid: 0f03bf8b0ca66f040a73a8550696f224,
         type: 3}
-      propertyPath: m_Name
-      value: GreenPlayer
+      propertyPath: FireSpeed
+      value: 20
+      objectReference: {fileID: 0}
+    - target: {fileID: 3868542479559832842, guid: 0f03bf8b0ca66f040a73a8550696f224,
+        type: 3}
+      propertyPath: FireDelay
+      value: 0.1
       objectReference: {fileID: 0}
     - target: {fileID: 2736464638290828658, guid: 0f03bf8b0ca66f040a73a8550696f224,
         type: 3}
@@ -5702,25 +5707,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 2736464638290828659, guid: 0f03bf8b0ca66f040a73a8550696f224,
+    - target: {fileID: 2736464638290828668, guid: 0f03bf8b0ca66f040a73a8550696f224,
         type: 3}
-      propertyPath: MovementAcceleration
-      value: 60
-      objectReference: {fileID: 0}
-    - target: {fileID: 2736464638290828659, guid: 0f03bf8b0ca66f040a73a8550696f224,
-        type: 3}
-      propertyPath: DashSpeed
-      value: 10
-      objectReference: {fileID: 0}
-    - target: {fileID: 2736464638290828659, guid: 0f03bf8b0ca66f040a73a8550696f224,
-        type: 3}
-      propertyPath: DashTime
-      value: 0.25
-      objectReference: {fileID: 0}
-    - target: {fileID: 2736464638290828659, guid: 0f03bf8b0ca66f040a73a8550696f224,
-        type: 3}
-      propertyPath: DashAcceleration
-      value: 100
+      propertyPath: m_Name
+      value: GreenPlayer
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 0f03bf8b0ca66f040a73a8550696f224, type: 3}
