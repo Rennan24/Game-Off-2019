@@ -53,13 +53,14 @@ public class PlayerController : MonoBehaviour
         mouseScreenPos.z = -camera.transform.position.z;
         var mouseWorldPos = camera.ScreenToWorldPoint(mouseScreenPos);
 
-        var mouseTargetDir = mouseWorldPos - transform.position;
+        var mouseTargetDir = mouseWorldPos - (transform.position + GunOffset);
 
         var gunRotZ = Mathf.Atan2(mouseTargetDir.y, mouseTargetDir.x) * Mathf.Rad2Deg;
         var gunPos = transform.position + GunOffset + mouseTargetDir.normalized;
         var gunQuat = Quaternion.Euler(0, 0, gunRotZ);
 
         Gun.transform.SetPositionAndRotation(gunPos, gunQuat);
+//        Gun.transform.rotation = gunQuat;
 
         // flip renderer if mouse is to the left of the player
         playerRenderer.flipX = mouseTargetDir.x < 0;

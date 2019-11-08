@@ -41,8 +41,11 @@ public class HitEffectBehaviour : MonoBehaviour
         hitAmount = Mathf.Max(hitAmount - decrement, 0);
     }
 
-    private void Hit(int amount, int curHealth)
+    private void Hit(Vector3 pos, int amount, int curHealth)
     {
+        Vector3 offset = new Vector3(0, 1);
+        Vector3 random = Random.insideUnitCircle * 0.5f;
+        DamageTextManager.Inst.SpawnText(transform.position + offset + random, 2.0f);
         hitAmount = 1.0f;
     }
 }

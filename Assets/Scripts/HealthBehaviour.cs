@@ -9,8 +9,8 @@ public class HealthBehaviour : MonoBehaviour
 
     public bool MaxHealthOnStart;
 
-    public HealthChangedEvent OnDamaged;
-    public HealthChangedEvent OnHealed;
+    public DamagedEvent OnDamaged;
+    public HealedEvent OnHealed;
     public UnityEvent OnDeath;
 
     [SerializeField]
@@ -25,7 +25,7 @@ public class HealthBehaviour : MonoBehaviour
     {
         curHealth = Mathf.Max(0, curHealth - amount);
 
-        OnDamaged?.Invoke(amount, curHealth);
+        OnDamaged?.Invoke(transform.position, amount, curHealth);
 
         if (curHealth <= 0)
         {
@@ -42,6 +42,11 @@ public class HealthBehaviour : MonoBehaviour
 }
 
 [System.Serializable]
-public class HealthChangedEvent : UnityEvent<int, int>
+public class DamagedEvent : UnityEvent<Vector3, int, int>
+{
+}
+
+[System.Serializable]
+public class HealedEvent : UnityEvent<int, int>
 {
 }

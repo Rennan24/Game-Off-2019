@@ -5,7 +5,7 @@ using UnityEngine;
 public class GunBehaviour : MonoBehaviour
 {
     [SerializeField] private VelocityBehaviour Projectile;
-    [SerializeField] private Vector4 FireOffset;
+    [SerializeField] private Vector2 FireOffset;
     [SerializeField] private float FireDelay;
     [SerializeField] private float FireSpeed;
 
