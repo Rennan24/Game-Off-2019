@@ -31,7 +31,6 @@ public class ChaseBehaviour : MonoBehaviour
         }
         else
         {
-            Debug.Log(Velocity);
             Velocity = Vector2.MoveTowards(Vector2.zero, Velocity, ChaseAcceleration * Time.deltaTime);
         }
     }

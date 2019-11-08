@@ -96,6 +96,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Projectile: {fileID: 4095131145471369300, guid: b86c2956c7e77fb4a9d2620cce8ea405,
     type: 3}
+  FireOffset: {x: 0, y: 0, z: 0, w: 0}
   FireDelay: 0
   FireSpeed: 0
 --- !u!1 &2736464638290828668
