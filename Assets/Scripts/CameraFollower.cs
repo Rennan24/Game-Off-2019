@@ -1,5 +1,4 @@
-﻿using System;
-using UnityEngine;
+﻿using UnityEngine;
 
 public class CameraFollower : MonoBehaviour
 {
@@ -14,10 +13,6 @@ public class CameraFollower : MonoBehaviour
     {
         position = transform.position;
         transform.position = Target.position + Offset;
-    }
-
-    private void Update()
-    {
     }
 
     private void FixedUpdate()

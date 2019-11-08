@@ -8,7 +8,6 @@ public class ChaseBehaviour : MonoBehaviour
     public float ChaseRadius;
     public Transform Target;
 
-
     public Vector2 Velocity;
 
 #if UNITY_EDITOR
@@ -19,11 +18,22 @@ public class ChaseBehaviour : MonoBehaviour
     }
 #endif
 
-    public void Update()
+    private void Update()
     {
         var targetVec = Target.transform.position - transform.position;
         var distsqr = targetVec.sqrMagnitude;
         var targetDir = targetVec.normalized;
+
+        //Chasing to the right
+        var scale = transform.localScale;
+        if (targetVec.x > 0.1f)
+        {
+            transform.localScale = new Vector3(Mathf.Abs(scale.x), scale.y, scale.z);
+        }
+        else if (targetVec.x < 0.1f)
+        {
+            transform.localScale = new Vector3(-Mathf.Abs(scale.x), scale.y, scale.z);
+        }
 
         if (distsqr < ChaseRadius * ChaseRadius)
         {
