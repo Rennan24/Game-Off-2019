@@ -14,11 +14,12 @@ public class DamageBehaviour : MonoBehaviour
 
     public void FixedUpdate()
     {
-        previousPosition = transform.position;
-
         var hitCount = Physics2DHelper.OverlapColliderCount(colliderRef, HitLayer, true);
         if (hitCount <= 0)
+        {
+            previousPosition = transform.position;
             return;
+        }
 
         for (int i = 0; i < hitCount; i++)
         {
@@ -30,12 +31,13 @@ public class DamageBehaviour : MonoBehaviour
             if(DestroyOnHit)
                 Destroy(gameObject);
         }
+
     }
 
     public void Damage(HealthBehaviour health)
     {
         Vector2 position = transform.position;
-        Vector2 hitDir = position - previousPosition;
+        Vector2 hitDir = (position - previousPosition).normalized;
 
         health.Damage(damageAmount, position, hitDir);
     }
