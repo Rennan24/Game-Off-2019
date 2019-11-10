@@ -1,6 +1,4 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 
 public class DamageBehaviour : MonoBehaviour
 {
@@ -8,18 +6,44 @@ public class DamageBehaviour : MonoBehaviour
     public LayerMask HitLayer;
     public bool DestroyOnHit;
 
-    public void OnTriggerEnter2D(Collider2D other)
-    {
-        if (HitLayer.HasLayer(other))
-        {
-            var health = other.GetComponent<HealthBehaviour>();
-            if (health == null)
-                return;
+    [Header("References:")]
+    [SerializeField]
+    private Collider2D colliderRef;
 
-            health.Damage(damageAmount);
+    private Vector2 previousPosition;
+
+    public void FixedUpdate()
+    {
+        previousPosition = transform.position;
+
+        var hitCount = Physics2DHelper.OverlapColliderCount(colliderRef, HitLayer, true);
+        if (hitCount <= 0)
+            return;
+
+        for (int i = 0; i < hitCount; i++)
+        {
+            var health = Physics2DHelper.HitColliders[i].GetComponentInParent<HealthBehaviour>();
+
+            if (health != null)
+                Damage(health);
 
             if(DestroyOnHit)
                 Destroy(gameObject);
         }
     }
+
+    public void Damage(HealthBehaviour health)
+    {
+        Vector2 position = transform.position;
+        Vector2 hitDir = position - previousPosition;
+
+        health.Damage(damageAmount, position, hitDir);
+    }
+
+#if UNITY_EDITOR
+    private void Reset()
+    {
+        colliderRef = GetComponent<Collider2D>();
+    }
+#endif
 }

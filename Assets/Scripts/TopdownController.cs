@@ -10,9 +10,6 @@ public class TopdownController : MonoBehaviour
 
     public Vector2 Velocity { get; private set; }
 
-//    [HideInInspector]
-    public bool Controllable = true;
-
     private Vector2 movement;
     private Vector2 currentPos;
     private Vector2 previousPos;

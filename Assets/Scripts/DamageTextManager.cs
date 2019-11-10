@@ -1,21 +1,18 @@
-﻿using System.Collections;
-using TMPro;
+﻿using TMPro;
 using UnityEngine;
 
 public class DamageTextManager : MonoBehaviourSingleton<DamageTextManager>
 {
     public TextMeshProUGUI damageText;
+    public Vector2 DamageTextVelocity;
 
     public void SpawnText(Vector3 position, float lifetime)
     {
         var text = Instantiate(damageText, position, Quaternion.identity, transform);
+        var simpleGravity = text.GetComponent<SimpleGravityBehaviour>();
+        simpleGravity.Velocity = new Vector2(Random.Range(-1, 1) * DamageTextVelocity.x, DamageTextVelocity.y);
+        
         text.CrossFadeAlpha(0, lifetime, false);
-        StartCoroutine(DestroyText(text.gameObject, lifetime));
-    }
-
-    private IEnumerator DestroyText(GameObject text, float lifetime)
-    {
-        yield return new WaitForSeconds(lifetime);
-        Destroy(text);
+        Destroy(text.gameObject, lifetime);
     }
 }

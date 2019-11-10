@@ -1,5 +1,4 @@
 ﻿using UnityEngine;
-using UnityEngine.InputSystem;
 
 public class PlayerController : MonoBehaviour
 {
@@ -59,7 +58,7 @@ public class PlayerController : MonoBehaviour
 
         if (fired)
          Gun.Fire(mouseTargetDir.normalized);
-        
+
         if (boost)
             dash.Dash(dir);
 
