@@ -10,6 +10,20 @@ public class ChaseBehaviour : MonoBehaviour
     [SerializeField]
     private TopdownController controllerRef;
 
+    private void Awake()
+    {
+        var health = GetComponent<HealthBehaviour>();
+        if (health != null)
+        {
+            health.Killed += StopChaseOnKilled;
+        }
+    }
+
+    private void StopChaseOnKilled(Vector3 hitpos, Vector2 hitdir)
+    {
+        enabled = false;
+    }
+
     private void FixedUpdate()
     {
         var targetVec = Target.transform.position - transform.position;
