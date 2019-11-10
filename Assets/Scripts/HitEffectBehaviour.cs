@@ -13,17 +13,17 @@ public class HitEffectBehaviour : MonoBehaviour
 
     private float hitAmount;
 
-    private static readonly int hitTime = Shader.PropertyToID("_HitTime");
-
-    private void Reset()
-    {
-        health = GetComponent<HealthBehaviour>();
-        renderer = GetComponent<SpriteRenderer>();
-    }
+    private static readonly int HitTimeID = Shader.PropertyToID("_HitTime");
 
     private void Awake()
     {
         block = new MaterialPropertyBlock();
+        health.Killed += OnKilled;
+    }
+
+    private void OnKilled(Vector3 hitpos, Vector2 hitdir)
+    {
+        Debug.Log("Killed");
     }
 
     private void Start()
@@ -34,7 +34,7 @@ public class HitEffectBehaviour : MonoBehaviour
     private void Update()
     {
         renderer.GetPropertyBlock(block);
-        block.SetFloat(hitTime, hitAmount);
+        block.SetFloat(HitTimeID, hitAmount);
         renderer.SetPropertyBlock(block);
 
         var decrement = HitEffectSpeed * Time.deltaTime;
@@ -50,4 +50,12 @@ public class HitEffectBehaviour : MonoBehaviour
         DamageTextManager.Inst.SpawnText(newPos, 1.0f);
         hitAmount = 1.0f;
     }
+
+#if UNITY_EDITOR
+    private void Reset()
+    {
+        health = GetComponent<HealthBehaviour>();
+        renderer = GetComponent<SpriteRenderer>();
+    }
+#endif
 }
