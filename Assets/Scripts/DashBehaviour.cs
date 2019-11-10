@@ -13,14 +13,14 @@ public class DashBehaviour : MonoBehaviour
     public float SpawnTime;
     public float FadeTime;
 
+    [Header("References:")]
     [SerializeField]
-    private Rigidbody2D body2D;
+    private TopdownController controllerRef;
 
     [SerializeField]
     private SpriteRenderer spriteRef;
 
-    private Vector2 curVel;
-    private Vector2 targetVel;
+    private Vector2 dashVel;
     private float dashTimer;
     private float trailTimer;
 
@@ -31,7 +31,7 @@ public class DashBehaviour : MonoBehaviour
         if (dashTimer <= 0f)
             return;
 
-        curVel = Vector2.MoveTowards(curVel, targetVel, Acceleration * Time.deltaTime);
+        controllerRef.Move(dashVel);
         dashTimer -= Time.deltaTime;
         trailTimer += Time.deltaTime;
 
@@ -42,18 +42,9 @@ public class DashBehaviour : MonoBehaviour
         }
     }
 
-    private void FixedUpdate()
-    {
-        if (dashTimer <= 0f)
-            return;
-
-        body2D.velocity = curVel;
-    }
-
     public void Dash(Vector2 dir)
     {
-        targetVel = dir * Speed;
-        curVel = body2D.velocity;
+        dashVel = dir * Speed;
         dashTimer = Length;
         trailTimer = 0;
     }

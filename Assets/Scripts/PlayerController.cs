@@ -1,31 +1,20 @@
-﻿using System;
-using UnityEngine;
+﻿using UnityEngine;
 using UnityEngine.InputSystem;
-using UnityEngine.Serialization;
 
 public class PlayerController : MonoBehaviour
 {
     public float MovementSpeed = 3;
-    public float MovementAcceleration;
-    public float DashSpeed;
-    public float DashTime;
-    public float DashAcceleration;
-
-    public int MaxDashCount;
 
     public GunBehaviour Gun;
     public Vector3 GunOffset;
 
-    public Vector2 Velocity;
     private InputMapping input;
-    private Vector2 dashDir;
-    private float dashTimer;
 
     private int curDashCount;
 
     [Header("References:")]
     [SerializeField]
-    private Rigidbody2D body;
+    private TopdownController controllerRef;
 
     [SerializeField]
     private SpriteRenderer playerRenderer;
@@ -33,18 +22,20 @@ public class PlayerController : MonoBehaviour
     [SerializeField]
     private SpriteRenderer gunRenderer;
 
+    [SerializeField]
+    private DashBehaviour dash;
+
     private Camera camera;
 
     private void Awake()
     {
         input = new InputMapping();
 
-        camera = FindObjectOfType<Camera>();
+        camera = Camera.main;
     }
 
     private void Update()
     {
-        var dt = Time.deltaTime;
         var dir = input.Player.Move.ReadValue<Vector2>();
         var boost = input.Player.Boost.triggered;
         var fired = input.Player.Fire.ReadValue<float>() > 0.1f;
@@ -67,32 +58,13 @@ public class PlayerController : MonoBehaviour
         gunRenderer.flipY = mouseTargetDir.x < 0;
 
         if (fired)
-        {
-            Gun.Fire(mouseTargetDir.normalized);
-        }
-
+         Gun.Fire(mouseTargetDir.normalized);
+        
         if (boost)
-        {
-            dashDir = dir;
-            dashTimer = DashTime;
-            curDashCount -= 1;
-        }
+            dash.Dash(dir);
 
-        if (dashTimer > 0f)
-        {
-            Velocity = Vector2.MoveTowards(Velocity, dashDir * DashSpeed, DashAcceleration * dt);
-        }
-        else
-        {
-            Velocity = Vector2.MoveTowards(Velocity, dir * MovementSpeed, MovementAcceleration * dt);
-        }
-
-        dashTimer -= dt;
-    }
-
-    private void FixedUpdate()
-    {
-        body.velocity = Velocity;
+        if(!dash.IsDashing)
+            controllerRef.Move(dir * MovementSpeed);
     }
 
     private void OnEnable()

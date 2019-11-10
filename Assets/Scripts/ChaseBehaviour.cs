@@ -1,24 +1,16 @@
-﻿using System;
-using UnityEngine;
+﻿using UnityEngine;
 
 public class ChaseBehaviour : MonoBehaviour
 {
     public float ChaseSpeed;
-    public float ChaseAcceleration;
     public float ChaseRadius;
     public Transform Target;
 
-    public Vector2 Velocity;
+    [Header("References:")]
+    [SerializeField]
+    private TopdownController controllerRef;
 
-#if UNITY_EDITOR
-    public void OnDrawGizmosSelected()
-    {
-        var color = new Color(1, 0, 0, 1f);
-        WHandles.DrawWireDisk(transform.position, ChaseRadius, color);
-    }
-#endif
-
-    private void Update()
+    private void FixedUpdate()
     {
         var targetVec = Target.transform.position - transform.position;
         var distsqr = targetVec.sqrMagnitude;
@@ -37,16 +29,20 @@ public class ChaseBehaviour : MonoBehaviour
 
         if (distsqr < ChaseRadius * ChaseRadius)
         {
-            Velocity = Vector2.MoveTowards(Velocity, targetDir * ChaseSpeed, ChaseAcceleration * Time.deltaTime);
-        }
-        else
-        {
-            Velocity = Vector2.MoveTowards(Vector2.zero, Velocity, ChaseAcceleration * Time.deltaTime);
+            controllerRef.Move(targetDir * ChaseSpeed);
         }
     }
 
-    private void FixedUpdate()
+#if UNITY_EDITOR
+    public void OnDrawGizmosSelected()
     {
-        transform.Translate(Velocity * Time.deltaTime);
+        var color = new Color(1, 0, 0, 1f);
+        WHandles.DrawWireDisk(transform.position, ChaseRadius, color);
     }
+
+    private void Reset()
+    {
+        controllerRef = GetComponentInChildren<TopdownController>();
+    }
+#endif
 }
