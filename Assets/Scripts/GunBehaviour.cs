@@ -1,4 +1,4 @@
-﻿using System.Collections;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -16,6 +16,7 @@ public class GunBehaviour : MonoBehaviour
         if (fireTimer > 0f)
             return;
 
+        CameraFollower.Inst.Shake(new Vector3(0.2f, 0.2f), 0.05f);
         var projectileVel = Instantiate(Projectile, transform.position, transform.rotation);
         projectileVel.Value = dir * FireSpeed;
         fireTimer = FireDelay;
