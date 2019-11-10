@@ -17,6 +17,8 @@ public class ChaseBehaviour : MonoBehaviour
         {
             health.Killed += StopChaseOnKilled;
         }
+
+        Target = FindObjectOfType<PlayerController>().transform;
     }
 
     private void StopChaseOnKilled(Vector3 hitpos, Vector2 hitdir)
