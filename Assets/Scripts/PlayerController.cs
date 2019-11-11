@@ -1,10 +1,10 @@
-﻿using UnityEngine;
+﻿using Spine.Unity;
+using UnityEngine;
 
 public class PlayerController : MonoBehaviour
 {
     public float MovementSpeed = 3;
 
-    public GunBehaviour Gun;
     public Vector3 GunOffset;
 
     private InputMapping input;
@@ -16,6 +16,9 @@ public class PlayerController : MonoBehaviour
     private TopdownController controllerRef;
 
     [SerializeField]
+    private GunBehaviour gunRef;
+
+    [SerializeField]
     private SpriteRenderer playerRenderer;
 
     [SerializeField]
@@ -24,40 +27,72 @@ public class PlayerController : MonoBehaviour
     [SerializeField]
     private DashBehaviour dash;
 
+    [SerializeField, SpineBone]
+    private string AimTargetName;
+
+    [SerializeField, SpineBone]
+    private string HipName;
+
+    [SerializeField, SpineBone]
+    private string ProjectileSpawnPointName;
+
+
+    private Spine.Bone projectileSpawnPoint;
+    private Spine.Bone aimTarget;
+    private Spine.Bone hipBone;
+
+    private SkeletonAnimation animator;
+
+    private int facing = -1;
     private Camera camera;
 
     private void Awake()
     {
+        animator = GetComponent<SkeletonAnimation>();
         input = new InputMapping();
 
         camera = Camera.main;
     }
 
+    private void Start()
+    {
+        hipBone = animator.skeleton.FindBone(HipName);
+        aimTarget = animator.skeleton.FindBone(AimTargetName);
+        projectileSpawnPoint = animator.skeleton.FindBone(ProjectileSpawnPointName);
+    }
+
     private void Update()
     {
         var dir = input.Player.Move.ReadValue<Vector2>();
-        var boost = input.Player.Boost.triggered;
         var fired = input.Player.Fire.ReadValue<float>() > 0.1f;
+        var boost = input.Player.Boost.triggered;
 
         Vector3 mouseScreenPos = Input.mousePosition;
         mouseScreenPos.z = -camera.transform.position.z;
         var mouseWorldPos = camera.ScreenToWorldPoint(mouseScreenPos);
 
-        var mouseTargetDir = mouseWorldPos - (transform.position + GunOffset);
+        var mouseTargetDir = mouseWorldPos - transform.position;
 
-        var gunRotZ = Mathf.Atan2(mouseTargetDir.y, mouseTargetDir.x) * Mathf.Rad2Deg;
-        var gunPos = transform.position + GunOffset + mouseTargetDir.normalized;
-        var gunQuat = Quaternion.Euler(0, 0, gunRotZ);
+        if (facing == 1 && mouseTargetDir.x > 0.3f)
+        {
+            facing = -1;
+            hipBone.ScaleX = facing;
+        }
 
-        Gun.transform.SetPositionAndRotation(gunPos, gunQuat);
-//        Gun.transform.rotation = gunQuat;
+        if(facing == -1 && mouseTargetDir.x < -0.3f)
+        {
+            facing = 1;
+            hipBone.ScaleX = facing;
+        }
 
-        // flip renderer if mouse is to the left of the player
-        playerRenderer.flipX = mouseTargetDir.x < 0;
-        gunRenderer.flipY = mouseTargetDir.x < 0;
+        var gunPos = projectileSpawnPoint.GetWorldPosition(transform);
+        var gunRot = Quaternion.Euler(0, 0, projectileSpawnPoint.WorldRotationX);
+        gunRef.transform.SetPositionAndRotation(gunPos, gunRot);
+
+        aimTarget.SetLocalPosition(mouseWorldPos - transform.position);
 
         if (fired)
-         Gun.Fire(mouseTargetDir.normalized);
+            gunRef.Fire(mouseTargetDir.normalized);
 
         if (boost)
             dash.Dash(dir);

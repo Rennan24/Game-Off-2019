@@ -1,0 +1,118 @@
+
+MainCharacter.png
+size: 1570,447
+format: RGBA8888
+filter: Linear,Linear
+repeat: none
+Eye
+  rotate: true
+  xy: 1486, 80
+  size: 146, 82
+  orig: 148, 84
+  offset: 1, 1
+  index: -1
+Front Hair
+  rotate: false
+  xy: 538, 32
+  size: 533, 413
+  orig: 535, 415
+  offset: 1, 1
+  index: -1
+Gun
+  rotate: false
+  xy: 1073, 215
+  size: 396, 230
+  orig: 398, 232
+  offset: 1, 1
+  index: -1
+Head
+  rotate: false
+  xy: 2, 9
+  size: 534, 436
+  orig: 536, 438
+  offset: 1, 1
+  index: -1
+L Arm
+  rotate: false
+  xy: 1385, 25
+  size: 78, 72
+  orig: 80, 74
+  offset: 1, 1
+  index: -1
+L Foot
+  rotate: false
+  xy: 600, 4
+  size: 46, 26
+  orig: 48, 28
+  offset: 1, 1
+  index: -1
+R Foot
+  rotate: false
+  xy: 600, 4
+  size: 46, 26
+  orig: 48, 28
+  offset: 1, 1
+  index: -1
+L Hair
+  rotate: true
+  xy: 1073, 67
+  size: 146, 216
+  orig: 148, 218
+  offset: 1, 1
+  index: -1
+L Leg
+  rotate: true
+  xy: 538, 2
+  size: 28, 60
+  orig: 30, 62
+  offset: 1, 1
+  index: -1
+R Leg
+  rotate: true
+  xy: 538, 2
+  size: 28, 60
+  orig: 30, 62
+  offset: 1, 1
+  index: -1
+L Shorts
+  rotate: false
+  xy: 1154, 13
+  size: 41, 52
+  orig: 43, 54
+  offset: 1, 1
+  index: -1
+R Arm
+  rotate: false
+  xy: 1291, 99
+  size: 193, 114
+  orig: 195, 116
+  offset: 1, 1
+  index: -1
+R Hair
+  rotate: false
+  xy: 1471, 228
+  size: 96, 217
+  orig: 98, 219
+  offset: 1, 1
+  index: -1
+R Shorts
+  rotate: false
+  xy: 1197, 20
+  size: 46, 45
+  orig: 48, 47
+  offset: 1, 1
+  index: -1
+Top Shorts
+  rotate: true
+  xy: 1073, 4
+  size: 61, 79
+  orig: 63, 81
+  offset: 1, 1
+  index: -1
+Torso
+  rotate: true
+  xy: 1291, 12
+  size: 85, 92
+  orig: 87, 94
+  offset: 1, 1
+  index: -1
