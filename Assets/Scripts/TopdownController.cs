@@ -1,10 +1,8 @@
 ﻿using UnityEngine;
 
+[RequireComponent(typeof(Rigidbody2D))]
 public class TopdownController : MonoBehaviour
 {
-    public float MovementAcceleration;
-
-    [Header("References:")]
     [SerializeField]
     private Rigidbody2D body2DRef;
 
@@ -38,6 +36,8 @@ public class TopdownController : MonoBehaviour
     private void Reset()
     {
         body2DRef = GetComponent<Rigidbody2D>();
+        body2DRef.constraints = RigidbodyConstraints2D.FreezeRotation;
+        body2DRef.gravityScale = 0;
     }
 #endif
 }

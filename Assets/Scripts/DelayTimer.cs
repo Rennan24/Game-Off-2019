@@ -1,10 +1,29 @@
+using UnityEngine;
+
+[System.Serializable]
 public struct DelayTimer
 {
-    public float Length;
-    private float timer;
+    public float DelayTime;
+    private float time;
 
-    private void Tick(float dt)
+    public DelayTimer(float delayTime)
     {
-        timer += dt;
+        DelayTime = delayTime;
+        time = Time.time;
+    }
+
+    public bool HasFinished()
+    {
+        if (Time.time < time + DelayTime)
+            return false;
+
+        time = Time.time;
+        return true;
+    }
+
+    public float TimeLeft()
+    {
+        var timeLeft = (time + DelayTime) - Time.time;
+        return Mathf.Max(0, timeLeft);
     }
 }

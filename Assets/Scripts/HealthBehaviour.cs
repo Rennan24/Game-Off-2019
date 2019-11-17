@@ -15,6 +15,8 @@ public class HealthBehaviour : MonoBehaviour
     public event OnHealed Healed;
     public event OnKilled Killed;
 
+    public bool IsKilled = false;
+
     [SerializeField]
     private int curHealth;
 
@@ -31,6 +33,7 @@ public class HealthBehaviour : MonoBehaviour
 
         if (curHealth <= 0)
         {
+            IsKilled = true;
             Killed?.Invoke(hitPos, hitDir);
         }
     }

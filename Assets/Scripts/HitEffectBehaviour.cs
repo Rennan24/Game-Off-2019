@@ -8,7 +8,7 @@ public class HitEffectBehaviour : MonoBehaviour
     private HealthBehaviour health;
 
     [SerializeField]
-    private SpriteRenderer renderer;
+    private Renderer renderer;
     private MaterialPropertyBlock block;
 
     private float hitAmount;
@@ -18,12 +18,6 @@ public class HitEffectBehaviour : MonoBehaviour
     private void Awake()
     {
         block = new MaterialPropertyBlock();
-        health.Killed += OnKilled;
-    }
-
-    private void OnKilled(Vector3 hitpos, Vector2 hitdir)
-    {
-        Debug.Log("Killed");
     }
 
     private void Start()
@@ -36,6 +30,9 @@ public class HitEffectBehaviour : MonoBehaviour
         renderer.GetPropertyBlock(block);
         block.SetFloat(HitTimeID, hitAmount);
         renderer.SetPropertyBlock(block);
+
+        if (health.IsKilled)
+            return;
 
         var decrement = HitEffectSpeed * Time.deltaTime;
         hitAmount = Mathf.Max(hitAmount - decrement, 0);
@@ -55,7 +52,7 @@ public class HitEffectBehaviour : MonoBehaviour
     private void Reset()
     {
         health = GetComponent<HealthBehaviour>();
-        renderer = GetComponent<SpriteRenderer>();
+        renderer = GetComponent<Renderer>();
     }
 #endif
 }
