@@ -59,6 +59,11 @@ public class PlayerController : MonoBehaviour
         hipBone = animator.skeleton.FindBone(HipName);
         aimTarget = animator.skeleton.FindBone(AimTargetName);
         projectileSpawnPoint = animator.skeleton.FindBone(ProjectileSpawnPointName);
+
+        // Flip the player to the facing direction
+        var mouseWorldPos = GetMouseWorldPos();
+        var mouseTargetDir = mouseWorldPos - transform.position + GunOffset;
+        facing = mouseTargetDir.x > 0f ? 1 : -1;
     }
 
     private void Update()
@@ -67,11 +72,8 @@ public class PlayerController : MonoBehaviour
         var fired = input.Player.Fire.ReadValue<float>() > 0.1f;
         var boost = input.Player.Boost.triggered;
 
-        Vector3 mouseScreenPos = Input.mousePosition;
-        mouseScreenPos.z = -camera.transform.position.z;
-        var mouseWorldPos = camera.ScreenToWorldPoint(mouseScreenPos);
-
-        var mouseTargetDir = mouseWorldPos - transform.position;
+        var mouseWorldPos = GetMouseWorldPos();
+        var mouseTargetDir = mouseWorldPos - transform.position + GunOffset;
 
         if (facing == 1 && mouseTargetDir.x > 0.3f)
         {
@@ -99,6 +101,13 @@ public class PlayerController : MonoBehaviour
 
         if(!dash.IsDashing)
             controllerRef.Move(dir * MovementSpeed);
+    }
+
+    private Vector3 GetMouseWorldPos()
+    {
+        var mouseScreenPos = Input.mousePosition;
+        mouseScreenPos.z = -camera.transform.position.z;
+        return camera.ScreenToWorldPoint(mouseScreenPos);
     }
 
     private void OnEnable()
