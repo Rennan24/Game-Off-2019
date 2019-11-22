@@ -175,7 +175,7 @@ namespace Spine.Unity.Editor {
 			// Header
 			EditorGUILayout.LabelField(SpineInspectorUtility.TempContent(target.name + " (SkeletonDataAsset)", Icons.spine), EditorStyles.whiteLargeLabel);
 			if (targetSkeletonData != null) EditorGUILayout.LabelField("(Drag and Drop to instantiate.)", EditorStyles.miniLabel);
-			
+
 			// Main Serialized Fields
 			using (var changeCheck = new EditorGUI.ChangeCheckScope()) {
 				using (new SpineInspectorUtility.BoxScope())
@@ -201,11 +201,11 @@ namespace Spine.Unity.Editor {
 					}
 				}
 			}
-			
+
 			// Unity Quirk: Some code depends on valid preview. If preview is initialized elsewhere, this can cause contents to change between Layout and Repaint events, causing GUILayout control count errors.
 			if (NoProblems())
 				preview.Initialize(this.Repaint, targetSkeletonDataAsset, this.LastSkinName);
-			
+
 			if (targetSkeletonData != null) {
 				GUILayout.Space(20f);
 
@@ -249,17 +249,23 @@ namespace Spine.Unity.Editor {
 		}
 
 		void CreateAnimationReferenceAssets () {
-			const string AssetFolderName = "ReferenceAssets";
-			string parentFolder = System.IO.Path.GetDirectoryName(AssetDatabase.GetAssetPath(targetSkeletonDataAsset));
-			string dataPath = parentFolder + "/" + AssetFolderName;
-			if (!AssetDatabase.IsValidFolder(dataPath)) {
-				AssetDatabase.CreateFolder(parentFolder, AssetFolderName);
-			}
+//			const string AssetFolderName = "ReferenceAssets";
+//			string parentFolder = System.IO.Path.GetDirectoryName(AssetDatabase.GetAssetPath(targetSkeletonDataAsset));
+//			string dataPath = parentFolder + "/" + AssetFolderName;
+//			if (!AssetDatabase.IsValidFolder(dataPath)) {
+//				AssetDatabase.CreateFolder(parentFolder, AssetFolderName);
+//			}
+
+			string skeletonPath = AssetDatabase.GetAssetPath(targetSkeletonDataAsset);
+			string folderName = System.IO.Directory.GetParent(skeletonPath).Name;
+			string dataPath = System.IO.Path.GetDirectoryName(skeletonPath);
 
 			FieldInfo nameField = typeof(AnimationReferenceAsset).GetField("animationName", BindingFlags.NonPublic | BindingFlags.Instance);
 			FieldInfo skeletonDataAssetField = typeof(AnimationReferenceAsset).GetField("skeletonDataAsset", BindingFlags.NonPublic | BindingFlags.Instance);
+
 			foreach (var animation in targetSkeletonData.Animations) {
-				string assetPath = string.Format("{0}/{1}.asset", dataPath, AssetUtility.GetPathSafeName(animation.Name));
+//				string assetPath = string.Format("{0}/{1}.asset", dataPath, AssetUtility.GetPathSafeName(animation.Name));
+				string assetPath = string.Format("{0}/{1}.asset", dataPath, AssetUtility.GetPathSafeName(folderName + animation.Name));
 				AnimationReferenceAsset existingAsset = AssetDatabase.LoadAssetAtPath<AnimationReferenceAsset>(assetPath);
 				if (existingAsset == null) {
 					AnimationReferenceAsset newAsset = ScriptableObject.CreateInstance<AnimationReferenceAsset>();
@@ -269,11 +275,11 @@ namespace Spine.Unity.Editor {
 				}
 			}
 
-			var folderObject = AssetDatabase.LoadAssetAtPath(dataPath, typeof(UnityEngine.Object));
-			if (folderObject != null) {
-				Selection.activeObject = folderObject;
-				EditorGUIUtility.PingObject(folderObject);
-			}
+//			var folderObject = AssetDatabase.LoadAssetAtPath(dataPath, typeof(UnityEngine.Object));
+//			if (folderObject != null) {
+//				Selection.activeObject = folderObject;
+//				EditorGUIUtility.PingObject(folderObject);
+//			}
 		}
 
 		void OnInspectorGUIMulti () {
@@ -597,7 +603,7 @@ namespace Spine.Unity.Editor {
 				warnings.Add("Missing Skeleton JSON");
 			} else {
 				var fieldValue = (TextAsset)skeletonJSON.objectReferenceValue;
-				
+
 				if (!AssetUtility.IsSpineData(fieldValue, out compatibilityProblemInfo)) {
 					warnings.Add("Skeleton data file is not a valid Spine JSON or binary file.");
 				} else {

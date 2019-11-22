@@ -528,10 +528,10 @@ namespace Spine {
 
 
 		/// <summary>Sets an animation by name. <seealso cref="SetAnimation(int, Animation, bool)" /></summary>
-		public TrackEntry SetAnimation (int trackIndex, string animationName, bool loop) {
+		public TrackEntry SetAnimation (int trackIndex, string animationName, bool loop, float timeScale = 1f) {
 			Animation animation = data.skeletonData.FindAnimation(animationName);
 			if (animation == null) throw new ArgumentException("Animation not found: " + animationName, "animationName");
-			return SetAnimation(trackIndex, animation, loop);
+			return SetAnimation(trackIndex, animation, loop, timeScale);
 		}
 
 		/// <summary>Sets the current animation for a track, discarding any queued animations. If the formerly current track entry was never
@@ -540,7 +540,7 @@ namespace Spine {
 		///          duration. In either case<see cref="TrackEntry.TrackEnd"/> determines when the track is cleared.</param>
 		/// <returns> A track entry to allow further customization of animation playback. References to the track entry must not be kept
 		///          after the <see cref="AnimationState.Dispose"/> event occurs.</returns>
-		public TrackEntry SetAnimation (int trackIndex, Animation animation, bool loop) {
+		public TrackEntry SetAnimation (int trackIndex, Animation animation, bool loop, float timeScale = 1f) {
 			if (animation == null) throw new ArgumentNullException("animation", "animation cannot be null.");
 			bool interrupt = true;
 			TrackEntry current = ExpandToIndex(trackIndex);
@@ -557,7 +557,7 @@ namespace Spine {
 					DisposeNext(current);
 				}
 			}
-			TrackEntry entry = NewTrackEntry(trackIndex, animation, loop, current);
+			TrackEntry entry = NewTrackEntry(trackIndex, animation, loop, current, timeScale);
 			SetCurrent(trackIndex, entry, interrupt);
 			queue.Drain();
 			return entry;
@@ -682,7 +682,7 @@ namespace Spine {
 
 		/// <summary>Object-pooling version of new TrackEntry. Obtain an unused TrackEntry from the pool and clear/initialize its values.</summary>
 		/// <param name="last">May be null.</param>
-		private TrackEntry NewTrackEntry (int trackIndex, Animation animation, bool loop, TrackEntry last) {
+		private TrackEntry NewTrackEntry (int trackIndex, Animation animation, bool loop, TrackEntry last, float timeScale = 1f) {
 			TrackEntry entry = trackEntryPool.Obtain(); // Pooling
 			entry.trackIndex = trackIndex;
 			entry.animation = animation;
@@ -703,7 +703,7 @@ namespace Spine {
 			entry.trackLast = -1;
 			entry.nextTrackLast = -1; // nextTrackLast == -1 signifies a TrackEntry that wasn't applied yet.
 			entry.trackEnd = float.MaxValue; // loop ? float.MaxValue : animation.Duration;
-			entry.timeScale = 1;
+			entry.timeScale = timeScale;
 
 			entry.alpha = 1;
 			entry.interruptAlpha = 1;
