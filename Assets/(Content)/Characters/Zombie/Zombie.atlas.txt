@@ -1,96 +1,96 @@
 
 Zombie.png
-size: 908,358
+size: 910,351
 format: RGBA8888
 filter: Linear,Linear
 repeat: none
 Hair
   rotate: true
-  xy: 428, 25
-  size: 331, 276
-  orig: 333, 278
+  xy: 431, 18
+  size: 331, 277
+  orig: 333, 279
   offset: 1, 1
   index: -1
 Head
   rotate: false
-  xy: 2, 3
-  size: 424, 353
-  orig: 426, 355
+  xy: 2, 2
+  size: 427, 347
+  orig: 429, 349
   offset: 1, 1
   index: -1
 L Arm
   rotate: true
-  xy: 816, 202
+  xy: 818, 195
   size: 49, 72
   orig: 51, 74
   offset: 1, 1
   index: -1
 L Foot
   rotate: true
-  xy: 867, 57
+  xy: 869, 50
   size: 32, 39
   orig: 42, 39
   offset: 10, 0
   index: -1
 L L2
   rotate: false
-  xy: 762, 2
+  xy: 710, 20
   size: 50, 62
-  orig: 52, 62
-  offset: 0, 0
+  orig: 52, 66
+  offset: 0, 2
   index: -1
 L Leg
   rotate: true
-  xy: 816, 91
+  xy: 818, 84
   size: 55, 63
   orig: 60, 64
   offset: 0, 1
   index: -1
 LArm
   rotate: true
-  xy: 706, 129
-  size: 227, 108
-  orig: 229, 110
+  xy: 710, 140
+  size: 209, 106
+  orig: 211, 108
   offset: 1, 1
   index: -1
 Pelvis
   rotate: true
-  xy: 814, 5
+  xy: 816, 23
   size: 59, 51
   orig: 59, 51
   offset: 0, 0
   index: -1
 R Arm
-  rotate: true
-  xy: 706, 22
+  rotate: false
+  xy: 710, 84
   size: 105, 54
   orig: 107, 56
   offset: 1, 1
   index: -1
 R Foot
   rotate: false
-  xy: 867, 21
+  xy: 869, 14
   size: 37, 34
   orig: 38, 35
   offset: 0, 1
   index: -1
 R L2
   rotate: true
-  xy: 762, 66
+  xy: 762, 21
   size: 61, 52
   orig: 61, 54
   offset: 0, 0
   index: -1
 R Leg
   rotate: false
-  xy: 816, 148
+  xy: 818, 141
   size: 64, 52
   orig: 64, 60
   offset: 0, 8
   index: -1
 Torso
   rotate: false
-  xy: 816, 253
+  xy: 818, 246
   size: 73, 103
   orig: 75, 105
   offset: 1, 1
