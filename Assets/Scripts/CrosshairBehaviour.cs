@@ -14,7 +14,7 @@ public class CrosshairBehaviour : MonoBehaviour
         Cursor.visible = false;
     }
 
-    public void Update()
+    public void FixedUpdate()
     {
         Vector3 mouseScreenPos = Input.mousePosition;
         mouseScreenPos.z = -camera.transform.position.z;

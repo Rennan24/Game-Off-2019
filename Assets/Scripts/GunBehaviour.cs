@@ -1,7 +1,12 @@
-﻿using UnityEngine;
+﻿using Cinemachine;
+using UnityEngine;
 
 public class GunBehaviour : MonoBehaviour
 {
+    public float ShakeAmplitude = 1f;
+    public float ShakeFrequency = 2f;
+    public float ShakeTime = 0.25f;
+
     [SerializeField] private VelocityBehaviour Projectile;
     [SerializeField] private float FireDelay;
     [SerializeField] private float FireSpeed;
@@ -11,7 +16,7 @@ public class GunBehaviour : MonoBehaviour
 
     private float fireTimer;
 
-    public void Fire(Vector3 dir)
+    public void Fire(Vector3 dir, Quaternion rot)
     {
         if (fireTimer > 0f)
             return;
@@ -21,10 +26,9 @@ public class GunBehaviour : MonoBehaviour
         audioSource.pitch = Random.Range(0.8f, 1.2f);
         audioSource.PlayOneShot(gunsounds[num]);
 
-
-        CameraFollower.Inst.Shake(new Vector3(0.2f, 0.2f), 0.05f);
-        var projectileVel = Instantiate(Projectile, transform.position, transform.rotation);
-        projectileVel.Value = dir * FireSpeed;
+        CameraController.Inst.Shake(ShakeAmplitude, ShakeFrequency);
+        var projectileVel = Instantiate(Projectile, transform.position, rot);
+        projectileVel.Value = transform.right * FireSpeed;
         fireTimer = FireDelay;
     }
 
