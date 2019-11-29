@@ -1,125 +1,146 @@
 
 MainCharacter.png
-size: 1966,450
+size: 1669,769
 format: RGBA8888
 filter: Linear,Linear
 repeat: none
 Axe
-  rotate: true
-  xy: 2, 6
-  size: 442, 364
+  rotate: false
+  xy: 1125, 405
+  size: 440, 362
   orig: 442, 364
-  offset: 0, 0
+  offset: 1, 1
+  index: -1
+Bazooka
+  rotate: false
+  xy: 2, 5
+  size: 723, 226
+  orig: 725, 228
+  offset: 1, 1
   index: -1
 Eye
-  rotate: false
-  xy: 1791, 120
+  rotate: true
+  xy: 1037, 621
   size: 146, 82
   orig: 148, 84
   offset: 1, 1
   index: -1
 Front Hair
-  rotate: false
-  xy: 904, 35
+  rotate: true
+  xy: 440, 234
   size: 533, 413
   orig: 535, 415
   offset: 1, 1
   index: -1
 Gun
-  rotate: true
-  xy: 1439, 50
-  size: 398, 232
+  rotate: false
+  xy: 727, 2
+  size: 396, 230
   orig: 398, 232
-  offset: 0, 0
+  offset: 1, 1
   index: -1
 Head
-  rotate: false
-  xy: 368, 12
+  rotate: true
+  xy: 2, 233
   size: 534, 436
   orig: 536, 438
   offset: 1, 1
   index: -1
 L Arm
-  rotate: true
-  xy: 1892, 370
+  rotate: false
+  xy: 1037, 453
   size: 78, 72
   orig: 80, 74
   offset: 1, 1
   index: -1
 L Foot
   rotate: false
-  xy: 966, 7
+  xy: 917, 248
   size: 46, 26
   orig: 48, 28
   offset: 1, 1
   index: -1
 R Foot
   rotate: false
-  xy: 966, 7
+  xy: 917, 248
   size: 46, 26
   orig: 48, 28
   offset: 1, 1
   index: -1
 L Hair
   rotate: true
-  xy: 1673, 204
+  xy: 1118, 257
   size: 146, 216
   orig: 148, 218
   offset: 1, 1
   index: -1
 L Leg
   rotate: true
-  xy: 904, 5
+  xy: 855, 246
   size: 28, 60
   orig: 30, 62
   offset: 1, 1
   index: -1
 R Leg
   rotate: true
-  xy: 904, 5
+  xy: 855, 246
   size: 28, 60
   orig: 30, 62
   offset: 1, 1
   index: -1
 L Shorts
   rotate: true
-  xy: 1486, 7
+  xy: 1567, 507
   size: 41, 52
   orig: 43, 54
   offset: 1, 1
   index: -1
 R Arm
-  rotate: true
-  xy: 1673, 7
-  size: 195, 116
-  orig: 195, 116
+  rotate: false
+  xy: 1125, 153
+  size: 203, 102
+  orig: 203, 102
   offset: 0, 0
   index: -1
 R Hair
-  rotate: true
-  xy: 1673, 352
+  rotate: false
+  xy: 1567, 550
   size: 96, 217
   orig: 98, 219
   offset: 1, 1
   index: -1
 R Shorts
-  rotate: true
-  xy: 1439, 2
+  rotate: false
+  xy: 1621, 503
   size: 46, 45
   orig: 48, 47
   offset: 1, 1
   index: -1
+Shotgun
+  rotate: true
+  xy: 855, 276
+  size: 491, 180
+  orig: 493, 182
+  offset: 1, 1
+  index: -1
 Top Shorts
-  rotate: false
-  xy: 1892, 289
+  rotate: true
+  xy: 1037, 390
   size: 61, 79
   orig: 63, 81
   offset: 1, 1
   index: -1
 Torso
   rotate: false
-  xy: 1791, 26
+  xy: 1037, 527
   size: 85, 92
   orig: 87, 94
+  offset: 1, 1
+  index: -1
+Uzi
+  rotate: false
+  xy: 1336, 51
+  size: 324, 352
+  orig: 326, 354
   offset: 1, 1
   index: -1
