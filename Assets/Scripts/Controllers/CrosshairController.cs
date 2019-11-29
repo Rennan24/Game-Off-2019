@@ -1,6 +1,6 @@
 ﻿using UnityEngine;
 
-public class CrosshairBehaviour : MonoBehaviour
+public class CrosshairController : MonoBehaviour
 {
     private Camera cam;
 

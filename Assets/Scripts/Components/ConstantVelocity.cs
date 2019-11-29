@@ -1,6 +1,6 @@
 ﻿using UnityEngine;
 
-public class VelocityBehaviour : MonoBehaviour
+public class ConstantVelocity : MonoBehaviour
 {
     public Vector3 Value;
 

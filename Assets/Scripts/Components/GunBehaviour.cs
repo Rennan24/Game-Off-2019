@@ -7,7 +7,7 @@ public class GunBehaviour : MonoBehaviour
     public float ShakeFrequency = 2f;
     public float ShakeTime = 0.25f;
 
-    [SerializeField] private VelocityBehaviour Projectile;
+    [SerializeField] private ConstantVelocity Projectile;
     [SerializeField] private float FireDelay;
     [SerializeField] private float FireSpeed;
     [SerializeField] private ParticleSystem MuzzleFlashRef;

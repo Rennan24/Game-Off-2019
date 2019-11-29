@@ -1,6 +1,6 @@
 ﻿using UnityEngine;
 
-public class ShadowComp : MonoBehaviour
+public class ShadowController : MonoBehaviour
 {
     public Transform Origin;
     public float maxHeight = 3.0f;
