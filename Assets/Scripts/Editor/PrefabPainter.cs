@@ -76,7 +76,7 @@ public class PrefabPainter : EditorWindow
         var asset = prefabAssets[i];
         var image = (Image) e.ElementAt(0);
         var label = (Label) e.ElementAt(1);
-        image.image = AssetPreview.GetAssetPreview(asset.Prefabs[0]);
+        image.image = prefabAssets[i].GetPrefabImage();// AssetPreview.GetAssetPreview(asset.Prefabs[0]);
         label.text = asset.name;
     }
 

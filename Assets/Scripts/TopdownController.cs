@@ -8,13 +8,22 @@ public class TopdownController : MonoBehaviour
 
     public Vector2 Velocity { get; private set; }
 
+    [HideInInspector]
+    public float VelocitySqrMagnitude;
+
     private Vector2 movement;
     private Vector2 currentPos;
     private Vector2 previousPos;
 
     public void Move(Vector2 move)
     {
-        movement += move * Time.deltaTime;
+        movement += Time.deltaTime * move;
+    }
+
+    public void MoveTowards(Vector2 pos, float speed)
+    {
+        var dir = (pos - (Vector2)transform.position).normalized;
+        movement += Time.deltaTime * speed * dir;
     }
 
     public void Teleport(Vector2 pos)
@@ -27,6 +36,7 @@ public class TopdownController : MonoBehaviour
         previousPos = body2DRef.position;
         currentPos = previousPos + movement;
         Velocity = (currentPos - previousPos) / Time.fixedDeltaTime;
+        VelocitySqrMagnitude = Velocity.sqrMagnitude;
 
         body2DRef.MovePosition(currentPos);
         movement = Vector2.zero;

@@ -2,11 +2,11 @@
 
 public class CrosshairBehaviour : MonoBehaviour
 {
-    private Camera camera;
+    private Camera cam;
 
     private void Awake()
     {
-        camera = Camera.main;
+        cam = Camera.main;
     }
 
     public void Start()
@@ -17,8 +17,8 @@ public class CrosshairBehaviour : MonoBehaviour
     public void FixedUpdate()
     {
         Vector3 mouseScreenPos = Input.mousePosition;
-        mouseScreenPos.z = -camera.transform.position.z;
-        var mouseWorldPos = camera.ScreenToWorldPoint(mouseScreenPos);
+        mouseScreenPos.z = -cam.transform.position.z;
+        var mouseWorldPos = cam.ScreenToWorldPoint(mouseScreenPos);
 
         transform.position = mouseWorldPos;
     }

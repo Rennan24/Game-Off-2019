@@ -10,4 +10,20 @@ public class PrefabCollectionAsset : ScriptableObject
         var i = Random.Range(0, Prefabs.Length);
         return Prefabs[i];
     }
+
+    public Texture GetPrefabImage()
+    {
+        var prefab = Prefabs[0];
+
+        if (prefab == null)
+            return null;
+
+        if (prefab.TryGetComponent<SpriteRenderer>(out var spriteRenderer))
+            return spriteRenderer.sprite.texture;
+        
+        if (prefab.TryGetComponent<Renderer>(out var renderer))
+            return renderer.sharedMaterial.mainTexture;
+
+        return null;
+    }
 }

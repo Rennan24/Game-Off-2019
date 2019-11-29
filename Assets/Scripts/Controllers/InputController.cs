@@ -12,12 +12,12 @@ public class InputController : MonoBehaviour
 
     public bool DashPressed { get; private set; }
 
-    private new Camera camera;
-    private new InputMapping input;
+    private Camera cam;
+    private InputMapping input;
 
     private void Awake()
     {
-        camera = Camera.main;
+        cam = Camera.main;
 
         input = new InputMapping();
     }
@@ -27,8 +27,8 @@ public class InputController : MonoBehaviour
         MouseScreenPos = Input.mousePosition;
 
         // Calculates the MouseWorldPos
-        var mouseTempPos = new Vector3(MouseScreenPos.x, MouseScreenPos.y, -camera.transform.position.z);
-        MouseWorldPos = camera.ScreenToWorldPoint(mouseTempPos);
+        var mouseTempPos = new Vector3(MouseScreenPos.x, MouseScreenPos.y, -cam.transform.position.z);
+        MouseWorldPos = cam.ScreenToWorldPoint(mouseTempPos);
 
         MoveDir = input.Player.Move.ReadValue<Vector2>();
         FireDown = input.Player.Fire.ReadValue<float>() > 0.1f;
