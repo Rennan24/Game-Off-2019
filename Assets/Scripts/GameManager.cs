@@ -16,7 +16,7 @@ public class GameManager : MonoBehaviourSingleton<GameManager>
     [SerializeField]
     private float fadeTime = 1.0f;
 
-    private int curLevelIndex;
+    private string curLevelName;
 
     private AudioSource musicSource;
 
@@ -33,9 +33,10 @@ public class GameManager : MonoBehaviourSingleton<GameManager>
 
 #if !UNITY_EDITOR
         fadeImage.color = new Color(0, 0, 0, 1);
-        StartCoroutine(LoadLevelRoutine(1));
+        StartCoroutine(LoadLevelRoutine("Forest"));
 #else
-        StartCoroutine(FadeImageOutRoutine());
+        curLevelName = "Forest";
+        LoadLevel(curLevelName);
 #endif
     }
 
@@ -50,18 +51,23 @@ public class GameManager : MonoBehaviourSingleton<GameManager>
         yield return new DOTweenCYInstruction.WaitForCompletion(fadeImage.DOFade(0.0f, fadeTime));
     }
 
-    public IEnumerator LoadLevelRoutine(int levelIndex)
+    public void LoadLevel(string levelName)
     {
-        if (curLevelIndex != 0)
+        StartCoroutine(LoadLevelRoutine(levelName));
+    }
+
+    private IEnumerator LoadLevelRoutine(string levelName)
+    {
+        if (curLevelName != null)
         {
             yield return new DOTweenCYInstruction.WaitForCompletion(fadeImage.DOFade(1.0f, fadeTime));
-            yield return SceneManager.UnloadSceneAsync(curLevelIndex);
+            yield return SceneManager.UnloadSceneAsync("Forest");
         }
 
-        yield return SceneManager.LoadSceneAsync(levelIndex, LoadSceneMode.Additive);
+        yield return SceneManager.LoadSceneAsync(levelName, LoadSceneMode.Single);
 
         UpdateReferences();
-        curLevelIndex = levelIndex;
+        curLevelName = levelName;
 
         yield return new DOTweenCYInstruction.WaitForCompletion(fadeImage.DOFade(0.0f, fadeTime));
     }

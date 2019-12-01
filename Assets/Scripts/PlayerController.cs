@@ -1,5 +1,7 @@
-﻿using Spine.Unity;
+﻿using System;
+using Spine.Unity;
 using UnityEngine;
+using UnityEngine.InputSystem;
 
 public class PlayerController : MonoFSM
 {
@@ -31,15 +33,21 @@ public class PlayerController : MonoFSM
     private string ArmBoneName;
 
     [SerializeField, SpineBone]
+    private string HipBoneName;
+
+    [SerializeField, SpineBone]
     private string bulletSpawnTargetName;
 
     private Spine.Bone bulletSpawnTarget;
     private Spine.Bone armBone;
+    private Spine.Bone hipBone;
 
     private int facing = -1;
     private float armRotation = 0f;
 
     public bool IsDead => Health.IsKilled;
+
+    private Vector2 targetDir;
 
     [SerializeField]
     private InputController input;
@@ -52,13 +60,15 @@ public class PlayerController : MonoFSM
             new Death(this),
         });
 
+        hipBone = animator.skeleton.FindBone(HipBoneName);
         armBone = animator.skeleton.FindBone(ArmBoneName);
         bulletSpawnTarget = animator.skeleton.FindBone(bulletSpawnTargetName);
 
         // Flip the player to the facing direction
         var mouseTargetDir = input.MouseWorldPos - transform.position;
         facing = mouseTargetDir.x > 0f ? 1 : -1;
-        animator.transform.ScaleX(facing);
+        hipBone.ScaleX = facing;
+//        animator.transform.ScaleX(facing);
 
         animator.UpdateWorld += AnimatorOnUpdateLocal;
 
@@ -103,26 +113,45 @@ public class PlayerController : MonoFSM
 
     protected override void Tick()
     {
-        var mouseTargetDir = (input.MouseWorldPos - transform.position).normalized;
+#if UNITY_EDITOR
+        if (Input.GetKeyDown(KeyCode.K))
+        {
+            Health.Damage(1000, Vector3.zero, Vector2.zero);
+        }
+#endif
 
-        if (facing == 1 && mouseTargetDir.x > 0.3f)
+        if (Gamepad.current != null)
+        {
+            if (input.RightStick.magnitude > 0.25f)
+            {
+                targetDir = input.RightStick;
+            }
+        }
+        else
+        {
+            targetDir = (input.MouseWorldPos - transform.position).normalized;
+        }
+
+        if (facing == 1 && targetDir.x > 0.3f)
         {
             facing = -1;
-            animator.transform.ScaleX(facing);
+            hipBone.ScaleX = facing;
+//            animator.transform.ScaleX(facing);
         }
 
-        if(facing == -1 && mouseTargetDir.x < -0.3f)
+        if(facing == -1 && targetDir.x < -0.3f)
         {
             facing = 1;
-            animator.transform.ScaleX(facing);
+            hipBone.ScaleX = facing;
+//            animator.transform.ScaleX(facing);
         }
 
-        armRotation = Mathf.Atan2(mouseTargetDir.y, mouseTargetDir.x) * Mathf.Rad2Deg;
+        armRotation = Mathf.Atan2(targetDir.y, targetDir.x) * Mathf.Rad2Deg;
 
-        if (input.FireDown)
+        if (input.FireDown && (Gamepad.current == null || input.RightStick.magnitude > 0.25f))
         {
             var bulletSpawnPos = bulletSpawnTarget.GetWorldPosition(transform);
-            var fired = CurWeapon.Attack(bulletSpawnPos, mouseTargetDir.normalized, armRotation);
+            var fired = CurWeapon.Attack(bulletSpawnPos, targetDir, armRotation);
 
             if(fired)
                 animator.state.SetAnimation(1, CurWeapon.AttackAnim, false);

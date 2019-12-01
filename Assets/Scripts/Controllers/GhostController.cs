@@ -47,8 +47,8 @@ public class GhostController: MonoFSM
 
         public override void FixedUpdate()
         {
-            var moveAway = GameManager.PlayerDead ? -1 : 1;
-            var dir = Agent.movement.MoveTowards(Agent.player.position, speed * -moveAway);
+            var moveAway = GameManager.PlayerDead ? 0 : 1;
+            var dir = Agent.movement.MoveTowards(Agent.player.position, speed * moveAway);
             T.ScaleX(dir.x > 0 ? 1 : -1);
         }
     }

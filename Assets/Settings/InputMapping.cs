@@ -49,6 +49,22 @@ public class @InputMapping : IInputActionCollection, IDisposable
                     ""expectedControlType"": ""Axis"",
                     ""processors"": """",
                     ""interactions"": """"
+                },
+                {
+                    ""name"": ""Aim"",
+                    ""type"": ""Value"",
+                    ""id"": ""4a83b369-336f-4c23-99e2-5fcf89a8ba29"",
+                    ""expectedControlType"": ""Vector2"",
+                    ""processors"": """",
+                    ""interactions"": """"
+                },
+                {
+                    ""name"": ""MousePos"",
+                    ""type"": ""Button"",
+                    ""id"": ""6a53eb11-95e6-4070-a224-bdcd26bf0c3c"",
+                    ""expectedControlType"": """",
+                    ""processors"": """",
+                    ""interactions"": """"
                 }
             ],
             ""bindings"": [
@@ -229,6 +245,17 @@ public class @InputMapping : IInputActionCollection, IDisposable
                     ""isPartOfComposite"": false
                 },
                 {
+                    ""name"": """",
+                    ""id"": ""c6bf49e4-3d97-473c-88ee-a9d272734478"",
+                    ""path"": ""<Gamepad>/buttonSouth"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""Gamepad"",
+                    ""action"": ""Boost"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
                     ""name"": ""Q And E [Keyboard]"",
                     ""id"": ""fb35c7d4-95bf-4cae-a5aa-1fe63711a238"",
                     ""path"": ""1DAxis"",
@@ -275,7 +302,7 @@ public class @InputMapping : IInputActionCollection, IDisposable
                 {
                     ""name"": ""negative"",
                     ""id"": ""4bdbc081-8472-4ee2-a74d-94559994d996"",
-                    ""path"": ""<Gamepad>/leftTrigger"",
+                    ""path"": ""<Gamepad>/leftShoulder"",
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": ""Gamepad"",
@@ -286,13 +313,35 @@ public class @InputMapping : IInputActionCollection, IDisposable
                 {
                     ""name"": ""positive"",
                     ""id"": ""362a51f5-b8ec-4306-8843-a09d39199df9"",
-                    ""path"": ""<Gamepad>/rightTrigger"",
+                    ""path"": ""<Gamepad>/rightShoulder"",
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": ""Gamepad"",
                     ""action"": ""SwapWeapon"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": true
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""128bfc31-ac41-423f-9a13-17674e3c6a08"",
+                    ""path"": ""<Gamepad>/rightStick"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""Gamepad"",
+                    ""action"": ""Aim"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""5073030e-7213-4be8-b3db-5507e09e6309"",
+                    ""path"": ""<Mouse>/position"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""Keyboard&Mouse"",
+                    ""action"": ""MousePos"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
                 }
             ]
         },
@@ -869,6 +918,8 @@ public class @InputMapping : IInputActionCollection, IDisposable
         m_Player_Fire = m_Player.FindAction("Fire", throwIfNotFound: true);
         m_Player_Boost = m_Player.FindAction("Boost", throwIfNotFound: true);
         m_Player_SwapWeapon = m_Player.FindAction("SwapWeapon", throwIfNotFound: true);
+        m_Player_Aim = m_Player.FindAction("Aim", throwIfNotFound: true);
+        m_Player_MousePos = m_Player.FindAction("MousePos", throwIfNotFound: true);
         // UI
         m_UI = asset.FindActionMap("UI", throwIfNotFound: true);
         m_UI_Navigate = m_UI.FindAction("Navigate", throwIfNotFound: true);
@@ -935,6 +986,8 @@ public class @InputMapping : IInputActionCollection, IDisposable
     private readonly InputAction m_Player_Fire;
     private readonly InputAction m_Player_Boost;
     private readonly InputAction m_Player_SwapWeapon;
+    private readonly InputAction m_Player_Aim;
+    private readonly InputAction m_Player_MousePos;
     public struct PlayerActions
     {
         private @InputMapping m_Wrapper;
@@ -943,6 +996,8 @@ public class @InputMapping : IInputActionCollection, IDisposable
         public InputAction @Fire => m_Wrapper.m_Player_Fire;
         public InputAction @Boost => m_Wrapper.m_Player_Boost;
         public InputAction @SwapWeapon => m_Wrapper.m_Player_SwapWeapon;
+        public InputAction @Aim => m_Wrapper.m_Player_Aim;
+        public InputAction @MousePos => m_Wrapper.m_Player_MousePos;
         public InputActionMap Get() { return m_Wrapper.m_Player; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -964,6 +1019,12 @@ public class @InputMapping : IInputActionCollection, IDisposable
                 @SwapWeapon.started -= m_Wrapper.m_PlayerActionsCallbackInterface.OnSwapWeapon;
                 @SwapWeapon.performed -= m_Wrapper.m_PlayerActionsCallbackInterface.OnSwapWeapon;
                 @SwapWeapon.canceled -= m_Wrapper.m_PlayerActionsCallbackInterface.OnSwapWeapon;
+                @Aim.started -= m_Wrapper.m_PlayerActionsCallbackInterface.OnAim;
+                @Aim.performed -= m_Wrapper.m_PlayerActionsCallbackInterface.OnAim;
+                @Aim.canceled -= m_Wrapper.m_PlayerActionsCallbackInterface.OnAim;
+                @MousePos.started -= m_Wrapper.m_PlayerActionsCallbackInterface.OnMousePos;
+                @MousePos.performed -= m_Wrapper.m_PlayerActionsCallbackInterface.OnMousePos;
+                @MousePos.canceled -= m_Wrapper.m_PlayerActionsCallbackInterface.OnMousePos;
             }
             m_Wrapper.m_PlayerActionsCallbackInterface = instance;
             if (instance != null)
@@ -980,6 +1041,12 @@ public class @InputMapping : IInputActionCollection, IDisposable
                 @SwapWeapon.started += instance.OnSwapWeapon;
                 @SwapWeapon.performed += instance.OnSwapWeapon;
                 @SwapWeapon.canceled += instance.OnSwapWeapon;
+                @Aim.started += instance.OnAim;
+                @Aim.performed += instance.OnAim;
+                @Aim.canceled += instance.OnAim;
+                @MousePos.started += instance.OnMousePos;
+                @MousePos.performed += instance.OnMousePos;
+                @MousePos.canceled += instance.OnMousePos;
             }
         }
     }
@@ -1148,6 +1215,8 @@ public class @InputMapping : IInputActionCollection, IDisposable
         void OnFire(InputAction.CallbackContext context);
         void OnBoost(InputAction.CallbackContext context);
         void OnSwapWeapon(InputAction.CallbackContext context);
+        void OnAim(InputAction.CallbackContext context);
+        void OnMousePos(InputAction.CallbackContext context);
     }
     public interface IUIActions
     {

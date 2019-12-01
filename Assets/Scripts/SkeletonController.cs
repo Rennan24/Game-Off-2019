@@ -46,6 +46,8 @@ public class SkeletonController: MonoFSM
             new Idle(this),
         });
 
+        health.Killed += (pos, dir) => ChangeState<Death>();
+
 //        var track = animator.state.SetAnimation(0, spawnAnim, false);
 //        Pause(track.AnimationEnd);
     }

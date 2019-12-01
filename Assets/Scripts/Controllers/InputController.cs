@@ -1,6 +1,7 @@
 ﻿using UnityEngine;
+using UnityEngine.InputSystem;
 
-public class InputController : MonoBehaviour
+public class InputController: MonoBehaviour
 {
     public Vector3 MouseScreenPos { get; private set; }
 
@@ -15,6 +16,8 @@ public class InputController : MonoBehaviour
     public bool SwapLeft { get; private set; }
     public bool SwapRight { get; private set; }
 
+    public Vector2 RightStick { get; private set; }
+
     private Camera cam;
     private InputMapping input;
 
@@ -28,11 +31,13 @@ public class InputController : MonoBehaviour
     private void Update()
     {
         MouseScreenPos = Input.mousePosition;
+//        MouseScreenPos = input.Player.MousePos.ReadValue<Vector2>();
 
         // Calculates the MouseWorldPos
         var mouseTempPos = new Vector3(MouseScreenPos.x, MouseScreenPos.y, -cam.transform.position.z);
         MouseWorldPos = cam.ScreenToWorldPoint(mouseTempPos);
 
+        RightStick = input.Player.Aim.ReadValue<Vector2>();
         MoveDir = input.Player.Move.ReadValue<Vector2>();
         FireDown = input.Player.Fire.ReadValue<float>() > 0.1f;
         DashPressed = input.Player.Boost.triggered;

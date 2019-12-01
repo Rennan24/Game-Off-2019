@@ -13,7 +13,7 @@ public class MonoBehaviourSingleton<T> : MonoBehaviour where T : MonoBehaviour
     }
 
     private static T inst;
-
+    
     public virtual void Awake()
     {
         Assert.IsNull(inst, $"There are more than one Singleton {typeof(T)}");

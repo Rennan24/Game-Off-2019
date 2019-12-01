@@ -10,10 +10,10 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 3f3d2b9b680338e45b65b5737120b25b, type: 3}
-  m_Name: ZombieLoot
+  m_Name: GhostLoot
   m_EditorClassIdentifier: 
   LootDrops:
-  - Probability: 7
+  - Probability: 1
     Drop: {fileID: 0}
   - Probability: 1
     Drop: {fileID: 2320148743446813916, guid: 65dafebfbd88b35449e25584a1a6f1e0, type: 3}

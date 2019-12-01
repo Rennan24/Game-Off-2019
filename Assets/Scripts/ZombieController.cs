@@ -10,7 +10,7 @@ public class ZombieController : MonoFSM, IWaveEnemy
     public float ChaseDist;
     public float ChaseSpeed;
     public float IdleTime = 1.25f;
-    
+
     [SerializeField] private AnimationReferenceAsset spawnAnim;
     [SerializeField] private AnimationReferenceAsset idleAnim;
     [SerializeField] private AnimationReferenceAsset walkAnim;
@@ -39,6 +39,7 @@ public class ZombieController : MonoFSM, IWaveEnemy
             new Chase(this),
             new Death(this),
             new Idle(this),
+            new Wander(this),
         });
 
         var track = animator.state.SetAnimation(0, spawnAnim, false);

@@ -277,6 +277,7 @@ GameObject:
   - component: {fileID: 6121610086850270183}
   - component: {fileID: 5792509568569470035}
   - component: {fileID: 4123576665266456991}
+  - component: {fileID: 1858482458583856363}
   m_Layer: 9
   m_Name: Zombie
   m_TagString: Untagged
@@ -332,7 +333,6 @@ MonoBehaviour:
   ChaseDist: 20
   ChaseSpeed: 4
   IdleTime: 1.25
-  loot: {fileID: 11400000, guid: fbae877b78e15c242b756840e7dc2409, type: 2}
   spawnAnim: {fileID: 11400000, guid: c69385e359cc6c44d99ce2243b673d59, type: 2}
   idleAnim: {fileID: 11400000, guid: d710097be809e4b41adbb32fa96174c8, type: 2}
   walkAnim: {fileID: 11400000, guid: cf5214f49e8c54c4aa173191be8285d1, type: 2}
@@ -389,6 +389,7 @@ MonoBehaviour:
   Score: 20
   DeathParticles: {fileID: 6149424076352855216, guid: 292dfdff92b25bb408c9d082494d832a,
     type: 3}
+  Loot: {fileID: 11400000, guid: fbae877b78e15c242b756840e7dc2409, type: 2}
   colliders:
   - {fileID: 5792509568569470035}
   - {fileID: 3146228730484169982}
@@ -441,3 +442,21 @@ Rigidbody2D:
   m_SleepingMode: 1
   m_CollisionDetection: 0
   m_Constraints: 4
+--- !u!114 &1858482458583856363
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4123576665266456986}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: bc917e88ad352d04999f0dda3e9ec65e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  damageAmount: 1
+  HitLayer:
+    serializedVersion: 2
+    m_Bits: 256
+  DestroyOnHit: 0
+  colliderRef: {fileID: 5792509568569470035}

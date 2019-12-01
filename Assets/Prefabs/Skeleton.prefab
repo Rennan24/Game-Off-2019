@@ -275,7 +275,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 74604d8f8a34e4f49accfefc8dd866d4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  MaxHealth: 10
+  MaxHealth: 5
   DamageDelay:
     Delay: 0
   IsKilled: 0
@@ -294,9 +294,10 @@ MonoBehaviour:
   DamageKnockbackSpeed: 15
   DeathKnockbackSpeed: 5
   DeathHoldTime: 1
-  Score: 10
+  Score: 50
   DeathParticles: {fileID: 6149424076352855216, guid: 292dfdff92b25bb408c9d082494d832a,
     type: 3}
+  Loot: {fileID: 11400000, guid: 82600942998d7a148a887d73fd4b3c48, type: 2}
   colliders:
   - {fileID: 6185821500147353981}
   - {fileID: 6185821498815399625}

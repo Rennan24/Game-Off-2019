@@ -67,7 +67,9 @@ public class PlayerUIManager : MonoBehaviour
     {
         yield return new WaitForSeconds(3.0f);
         DeathText.DOFade(1, 2f);
-        StartCoroutine(GameManager.Inst.LoadLevelRoutine(1));
+
+        yield return new WaitForSeconds(6.0f);
+        GameManager.Inst.LoadLevel("Forest");
     }
 
     private void PlayerHealthOnKilled(Vector3 hitpos, Vector2 hitdir)

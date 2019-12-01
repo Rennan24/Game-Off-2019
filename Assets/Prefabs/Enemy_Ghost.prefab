@@ -314,6 +314,7 @@ MonoBehaviour:
   Score: 100
   DeathParticles: {fileID: 6149424076352855216, guid: 292dfdff92b25bb408c9d082494d832a,
     type: 3}
+  Loot: {fileID: 11400000, guid: 81dfa102f02320a418ac383170e98164, type: 2}
   colliders:
   - {fileID: 8117014109239810541}
   healthRef: {fileID: 1806283543}
