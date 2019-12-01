@@ -8,12 +8,12 @@ public class FaceTowardsVelocity : MonoBehaviour
     public Vector3 Normal;
 
     [SerializeField]
-    private VelocityBehaviour velocity;
+    private ConstantVelocity velocity;
 
     private void Reset()
     {
         Normal = transform.up;
-        velocity = GetComponent<VelocityBehaviour>();
+        velocity = GetComponent<ConstantVelocity>();
     }
 
     private void Update()

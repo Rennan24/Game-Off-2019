@@ -1,0 +1,23 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3f3d2b9b680338e45b65b5737120b25b, type: 3}
+  m_Name: ZombieLoot
+  m_EditorClassIdentifier: 
+  LootDrops:
+  - Probability: 1
+    Drop: {fileID: 6201200647518886748, guid: e09cda181ebaf9c4794f20069cbe0857, type: 3}
+  - Probability: 1
+    Drop: {fileID: 2320148743446813916, guid: 65dafebfbd88b35449e25584a1a6f1e0, type: 3}
+  - Probability: 1
+    Drop: {fileID: 9102925426395350611, guid: d21ed13f10b724543b67b985a4411e89, type: 3}
+  - Probability: 1
+    Drop: {fileID: 2633320193657592784, guid: aca5b3808209bea4fa163bc42fceed3a, type: 3}

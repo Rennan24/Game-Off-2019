@@ -41,11 +41,23 @@ TagManager:
   - name: Ground
     uniqueID: 2789545085
     locked: 0
+  - name: ParticleFX
+    uniqueID: 3206391373
+    locked: 0
+  - name: ParticleFXBloom
+    uniqueID: 4248017149
+    locked: 0
   - name: Shadows
     uniqueID: 2931966045
     locked: 0
   - name: Default
     uniqueID: 0
+    locked: 0
+  - name: New Layer
+    uniqueID: 1792714867
+    locked: 0
+  - name: Projectile
+    uniqueID: 3560575953
     locked: 0
   - name: Foreground
     uniqueID: 4081259867

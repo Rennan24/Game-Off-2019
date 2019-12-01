@@ -1,0 +1,25 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 13a9f940313d06d4caed9863bf024ebf, type: 3}
+  m_Name: Shotgun_Shot_AudioEvent
+  m_EditorClassIdentifier: 
+  clips:
+  - {fileID: 8300000, guid: 8de5333f3260a5b44b49578c90570fb5, type: 3}
+  - {fileID: 8300000, guid: 7c7dba163b87b8e49bea95753283ffa2, type: 3}
+  - {fileID: 8300000, guid: f05beb09292731b4e94e5de9a44b1e16, type: 3}
+  - {fileID: 8300000, guid: ce78afe957e759d4ea99943e73a3bc5a, type: 3}
+  Volume:
+    Min: 0.9
+    Max: 1.1
+  Pitch:
+    Min: 0.9
+    Max: 1.1

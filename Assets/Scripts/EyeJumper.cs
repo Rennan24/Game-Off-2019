@@ -25,7 +25,7 @@ public class EyeJumper : MonoBehaviour
     private Transform visualtf;
 
     [SerializeField]
-    private TopdownController controller;
+    private MovementController controller;
 
     [SerializeField]
     private SkeletonAnimation animator;

@@ -41,6 +41,14 @@ public class @InputMapping : IInputActionCollection, IDisposable
                     ""expectedControlType"": """",
                     ""processors"": """",
                     ""interactions"": """"
+                },
+                {
+                    ""name"": ""SwapWeapon"",
+                    ""type"": ""Value"",
+                    ""id"": ""02d013a3-d487-4d4d-853b-52c648cfab8b"",
+                    ""expectedControlType"": ""Axis"",
+                    ""processors"": """",
+                    ""interactions"": """"
                 }
             ],
             ""bindings"": [
@@ -219,6 +227,72 @@ public class @InputMapping : IInputActionCollection, IDisposable
                     ""action"": ""Boost"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": ""Q And E [Keyboard]"",
+                    ""id"": ""fb35c7d4-95bf-4cae-a5aa-1fe63711a238"",
+                    ""path"": ""1DAxis"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""SwapWeapon"",
+                    ""isComposite"": true,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": ""negative"",
+                    ""id"": ""4254c538-33c6-4341-a48b-23c370fd1d0f"",
+                    ""path"": ""<Keyboard>/q"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""Keyboard&Mouse"",
+                    ""action"": ""SwapWeapon"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": true
+                },
+                {
+                    ""name"": ""positive"",
+                    ""id"": ""20b44805-18bb-4b52-9331-a4015d89e7fc"",
+                    ""path"": ""<Keyboard>/e"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""Keyboard&Mouse"",
+                    ""action"": ""SwapWeapon"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": true
+                },
+                {
+                    ""name"": ""Triggers"",
+                    ""id"": ""56d80f19-f657-4406-adb6-b66becaa07d4"",
+                    ""path"": ""1DAxis"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""SwapWeapon"",
+                    ""isComposite"": true,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": ""negative"",
+                    ""id"": ""4bdbc081-8472-4ee2-a74d-94559994d996"",
+                    ""path"": ""<Gamepad>/leftTrigger"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""Gamepad"",
+                    ""action"": ""SwapWeapon"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": true
+                },
+                {
+                    ""name"": ""positive"",
+                    ""id"": ""362a51f5-b8ec-4306-8843-a09d39199df9"",
+                    ""path"": ""<Gamepad>/rightTrigger"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""Gamepad"",
+                    ""action"": ""SwapWeapon"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": true
                 }
             ]
         },
@@ -794,6 +868,7 @@ public class @InputMapping : IInputActionCollection, IDisposable
         m_Player_Move = m_Player.FindAction("Move", throwIfNotFound: true);
         m_Player_Fire = m_Player.FindAction("Fire", throwIfNotFound: true);
         m_Player_Boost = m_Player.FindAction("Boost", throwIfNotFound: true);
+        m_Player_SwapWeapon = m_Player.FindAction("SwapWeapon", throwIfNotFound: true);
         // UI
         m_UI = asset.FindActionMap("UI", throwIfNotFound: true);
         m_UI_Navigate = m_UI.FindAction("Navigate", throwIfNotFound: true);
@@ -859,6 +934,7 @@ public class @InputMapping : IInputActionCollection, IDisposable
     private readonly InputAction m_Player_Move;
     private readonly InputAction m_Player_Fire;
     private readonly InputAction m_Player_Boost;
+    private readonly InputAction m_Player_SwapWeapon;
     public struct PlayerActions
     {
         private @InputMapping m_Wrapper;
@@ -866,6 +942,7 @@ public class @InputMapping : IInputActionCollection, IDisposable
         public InputAction @Move => m_Wrapper.m_Player_Move;
         public InputAction @Fire => m_Wrapper.m_Player_Fire;
         public InputAction @Boost => m_Wrapper.m_Player_Boost;
+        public InputAction @SwapWeapon => m_Wrapper.m_Player_SwapWeapon;
         public InputActionMap Get() { return m_Wrapper.m_Player; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -884,6 +961,9 @@ public class @InputMapping : IInputActionCollection, IDisposable
                 @Boost.started -= m_Wrapper.m_PlayerActionsCallbackInterface.OnBoost;
                 @Boost.performed -= m_Wrapper.m_PlayerActionsCallbackInterface.OnBoost;
                 @Boost.canceled -= m_Wrapper.m_PlayerActionsCallbackInterface.OnBoost;
+                @SwapWeapon.started -= m_Wrapper.m_PlayerActionsCallbackInterface.OnSwapWeapon;
+                @SwapWeapon.performed -= m_Wrapper.m_PlayerActionsCallbackInterface.OnSwapWeapon;
+                @SwapWeapon.canceled -= m_Wrapper.m_PlayerActionsCallbackInterface.OnSwapWeapon;
             }
             m_Wrapper.m_PlayerActionsCallbackInterface = instance;
             if (instance != null)
@@ -897,6 +977,9 @@ public class @InputMapping : IInputActionCollection, IDisposable
                 @Boost.started += instance.OnBoost;
                 @Boost.performed += instance.OnBoost;
                 @Boost.canceled += instance.OnBoost;
+                @SwapWeapon.started += instance.OnSwapWeapon;
+                @SwapWeapon.performed += instance.OnSwapWeapon;
+                @SwapWeapon.canceled += instance.OnSwapWeapon;
             }
         }
     }
@@ -1064,6 +1147,7 @@ public class @InputMapping : IInputActionCollection, IDisposable
         void OnMove(InputAction.CallbackContext context);
         void OnFire(InputAction.CallbackContext context);
         void OnBoost(InputAction.CallbackContext context);
+        void OnSwapWeapon(InputAction.CallbackContext context);
     }
     public interface IUIActions
     {

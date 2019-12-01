@@ -1,0 +1,21 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fef00f4e3be82ed4c87053e5e95c44b3, type: 3}
+  m_Name: SmallGrassCollection
+  m_EditorClassIdentifier: 
+  Prefabs:
+  - {fileID: 4200419506177790282, guid: c64542ead3126c04b81950ac796bf6ec, type: 3}
+  - {fileID: 5269989368047423598, guid: c7492e712efc64f43b7535ae989458cc, type: 3}
+  minSize: {x: 1, y: 1}
+  maxSize: {x: 2, y: 2}
+  minRotation: -5
+  maxRotation: 5

@@ -12,6 +12,17 @@ public class PrefabPainter : EditorWindow
     private ObjectField prefabCollectionField;
     private ObjectField parentField;
 
+    private PrefabCollectionAsset curAsset;
+
+    private SerializedObject curObj;
+
+    private Foldout foldout;
+
+    private bool flipX;
+
+    private const string UXLMPath = "Assets/Scripts/Editor/UIElements/PrefabPainter.uxml";
+    private const string USSPath = "Assets/Scripts/Editor/UIElements/PrefabPainter.uss";
+
     [MenuItem("Tools/Prefab Painter")]
     public static void OpenWindow()
     {
@@ -32,6 +43,23 @@ public class PrefabPainter : EditorWindow
     private void CreateGUI()
     {
         var root = rootVisualElement;
+
+        // Setting up the GUI from UXML and USS
+//        var tree = AssetDatabase.LoadAssetAtPath<VisualTreeAsset>(UXLMPath);
+//        var uss = AssetDatabase.LoadAssetAtPath<StyleSheet>(USSPath);
+//        tree.CloneTree(root);
+//        root.styleSheets.Add(uss);
+//
+//        foldout = root.Q<Foldout>();
+//
+//        var prefabCollectionField = root.Q<ObjectField>("PrefabCollection");
+//        var parentField = root.Q<ObjectField>("Parent");
+//
+//
+//        parentField.objectType = typeof(GameObject);
+//
+//        prefabCollectionField.objectType = typeof(PrefabCollectionAsset);
+//        prefabCollectionField.RegisterValueChangedCallback(Callback);
 
         prefabCollectionField = new ObjectField("Prefab Collection Asset") {
             objectType = typeof(PrefabCollectionAsset),
@@ -57,14 +85,27 @@ public class PrefabPainter : EditorWindow
         var listView = new ListView(prefabAssets, 100, MakeItem, BindItem);
         listView.onSelectionChanged += ListViewOnOnSelectionChanged;
         listView.selectionType = SelectionType.Single;
-        listView.style.flexDirection = FlexDirection.Row;
-        listView.style.flexWrap = Wrap.Wrap;
         listView.style.flexGrow = 1f;
+
+        listView.contentContainer.style.flexDirection = FlexDirection.Row;
+        listView.contentContainer.style.flexWrap = Wrap.Wrap;
+
+        var toggle = new Toggle("Flippable");
+
+        toggle.RegisterValueChangedCallback(evt => flipX = evt.newValue);
 
         root.Add(prefabCollectionField);
         root.Add(parentField);
+        root.Add(toggle);
         root.Add(listView);
     }
+
+//    private void Callback(ChangeEvent<Object> evt)
+//    {
+//        var prefabCol = (PrefabCollectionAsset) evt.newValue;
+//        curObj = new SerializedObject(prefabCol);
+//        foldout.Bind(curObj);
+//    }
 
     private void ListViewOnOnSelectionChanged(List<object> obj)
     {
@@ -76,7 +117,7 @@ public class PrefabPainter : EditorWindow
         var asset = prefabAssets[i];
         var image = (Image) e.ElementAt(0);
         var label = (Label) e.ElementAt(1);
-        image.image = prefabAssets[i].GetPrefabImage();// AssetPreview.GetAssetPreview(asset.Prefabs[0]);
+        image.image = prefabAssets[i].GetPrefabImage();
         label.text = asset.name;
     }
 
@@ -131,7 +172,10 @@ public class PrefabPainter : EditorWindow
 
         var obj = PrefabUtility.InstantiatePrefab(prefab, parent) as GameObject;
         Undo.RegisterCreatedObjectUndo(obj, "Object Created");
+
         obj.transform.position = worldPos;
-        obj.transform.ScaleX(UnityEngine.Random.value > 0.5f ? -1 : 1);
+        obj.transform.ScaleX(flipX && UnityEngine.Random.value > 0.5f ? -1 : 1);
+        obj.transform.localScale *= prefabCollection.GetRandomSize();
+        obj.transform.rotation = Quaternion.Euler(0, 0, prefabCollection.GetRandomRotation());
     }
 }

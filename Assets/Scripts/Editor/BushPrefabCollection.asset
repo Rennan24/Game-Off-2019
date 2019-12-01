@@ -1,0 +1,23 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fef00f4e3be82ed4c87053e5e95c44b3, type: 3}
+  m_Name: BushPrefabCollection
+  m_EditorClassIdentifier: 
+  Prefabs:
+  - {fileID: 4784899503211311985, guid: a89ee56b99cdbe84896b75f4aad8bf15, type: 3}
+  - {fileID: 5688564063980768073, guid: 96157bb2337388442b7d67898567d353, type: 3}
+  - {fileID: 6767359469648183160, guid: e3b1243870a4fdd478a717bf2abab3f5, type: 3}
+  - {fileID: 1478745785902955943, guid: 2a973b1ad2b0bcb4e88517ee543c0570, type: 3}
+  minSize: {x: 1, y: 1}
+  maxSize: {x: 2, y: 2}
+  minRotation: 0
+  maxRotation: 0

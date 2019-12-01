@@ -1,0 +1,25 @@
+.unity-scroll-view__content-container {
+    flex-direction: row;
+    justify-content: flex-start;
+    align-items: flex-start;
+    flex-wrap: wrap;
+    flex-grow: 0;
+}
+
+.teststyle {
+    justify-content: flex-start;
+    align-items: auto;
+    max-width: 200px;
+    min-width: 100px;
+    min-height: 150px;
+    max-height: 200px;
+    flex-grow: 1;
+    padding-left: 0;
+    padding-right: 0;
+    padding-top: 0;
+    padding-bottom: 0;
+    margin-left: 2px;
+    margin-right: 2px;
+    margin-top: 2px;
+    margin-bottom: 2px;
+}

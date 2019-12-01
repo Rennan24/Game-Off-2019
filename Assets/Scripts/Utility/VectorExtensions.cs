@@ -34,6 +34,18 @@ public static class TransformExtensions
     public static Vector3 GetDelta(this Transform t, Vector3 other)
         => other - t.position;
 
+    public static void FlipX(this Transform t)
+    {
+        var scale = t.localScale;
+        t.localScale = new Vector3(scale.x * -1, scale.y, scale.z);
+    }
+
+    public static void FlipY(this Transform t)
+    {
+        var scale = t.localScale;
+        t.localScale = new Vector3(scale.x, scale.y * -1, scale.z);
+    }
+
     public static void ScaleX(this Transform t, float newX)
     {
         var scale = t.localScale;

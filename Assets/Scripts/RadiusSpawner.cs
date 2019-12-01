@@ -5,7 +5,7 @@ public class RadiusSpawner : MonoBehaviour
 {
     public float SpawnDelay;
     public float Radius;
-    public GameObject SpawnerPrefab;
+    public GameObject[] SpawnerPrefabs;
     public bool SpawnParented;
 
     private float timer;
@@ -19,9 +19,15 @@ public class RadiusSpawner : MonoBehaviour
             var radiusPosition = (Vector2)transform.position + Random.insideUnitCircle * Radius;
 
             if (SpawnParented)
-                Instantiate(SpawnerPrefab, radiusPosition, Quaternion.identity, transform);
+            {
+                var n = Random.Range(0, SpawnerPrefabs.Length);
+                Instantiate(SpawnerPrefabs[n], radiusPosition, Quaternion.identity, transform);
+            }
             else
-                Instantiate(SpawnerPrefab, radiusPosition, Quaternion.identity);
+            {
+                var n = Random.Range(0, SpawnerPrefabs.Length);
+                Instantiate(SpawnerPrefabs[n], radiusPosition, Quaternion.identity);
+            }
 
             timer = 0;
         }

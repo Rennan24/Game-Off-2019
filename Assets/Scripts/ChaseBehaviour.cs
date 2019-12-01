@@ -8,7 +8,7 @@ public class ChaseBehaviour : MonoBehaviour
 
     [Header("References:")]
     [SerializeField]
-    private TopdownController controllerRef;
+    private MovementController controllerRef;
 
     private void Awake()
     {
@@ -58,7 +58,7 @@ public class ChaseBehaviour : MonoBehaviour
 
     private void Reset()
     {
-        controllerRef = GetComponentInChildren<TopdownController>();
+        controllerRef = GetComponentInChildren<MovementController>();
     }
 #endif
 }

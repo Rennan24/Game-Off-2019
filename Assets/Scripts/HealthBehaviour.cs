@@ -4,8 +4,7 @@ using UnityEngine.Events;
 public class HealthBehaviour : MonoBehaviour
 {
     public int MaxHealth;
-
-    public bool MaxHealthOnStart;
+    public DelayTimer DamageDelay;
 
     public delegate void OnDamaged(Vector3 hitPos, Vector2 hitDir, int hitAmount, int curHealth);
     public delegate void OnHealed(int healAmount, int curHealth);
@@ -15,23 +14,26 @@ public class HealthBehaviour : MonoBehaviour
     public event OnHealed Healed;
     public event OnKilled Killed;
 
+    [HideInInspector]
     public bool IsKilled = false;
 
-    [SerializeField]
-    private int curHealth;
+    public int CurHealth { get; private set; }
 
-    private void Start()
+    private void Awake()
     {
-        curHealth = MaxHealthOnStart ? MaxHealth : 0;
+        CurHealth = MaxHealth;
     }
 
     public void Damage(int amount, Vector3 hitPos, Vector2 hitDir)
     {
-        curHealth = Mathf.Max(0, curHealth - amount);
+        if (!DamageDelay.AutoReady())
+            return;
 
-        Damaged?.Invoke(hitPos, hitDir, amount, curHealth);
+        CurHealth = Mathf.Max(0, CurHealth - amount);
 
-        if (curHealth <= 0)
+        Damaged?.Invoke(hitPos, hitDir, amount, CurHealth);
+
+        if (CurHealth <= 0)
         {
             IsKilled = true;
             Killed?.Invoke(hitPos, hitDir);
@@ -40,23 +42,16 @@ public class HealthBehaviour : MonoBehaviour
 
     public void Heal(int amount)
     {
-        curHealth = Mathf.Min(MaxHealth, curHealth + amount);
-        Healed?.Invoke(amount, curHealth);
+        CurHealth = Mathf.Min(MaxHealth, CurHealth + amount);
+        Healed?.Invoke(amount, CurHealth);
     }
 }
 
 [System.Serializable]
-public class DamagedEvent : UnityEvent<Vector3, Vector2, int, int>
-{
-}
+public class DamagedEvent : UnityEvent<Vector3, Vector2, int, int> { }
 
 [System.Serializable]
-public class DeathEvent : UnityEvent<Vector3, Vector2>
-{
-}
-
+public class DeathEvent : UnityEvent<Vector3, Vector2> { }
 
 [System.Serializable]
-public class HealedEvent : UnityEvent<int, int>
-{
-}
+public class HealedEvent : UnityEvent<int, int> { }

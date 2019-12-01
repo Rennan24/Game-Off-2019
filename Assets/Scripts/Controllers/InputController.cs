@@ -12,6 +12,9 @@ public class InputController : MonoBehaviour
 
     public bool DashPressed { get; private set; }
 
+    public bool SwapLeft { get; private set; }
+    public bool SwapRight { get; private set; }
+
     private Camera cam;
     private InputMapping input;
 
@@ -33,14 +36,19 @@ public class InputController : MonoBehaviour
         MoveDir = input.Player.Move.ReadValue<Vector2>();
         FireDown = input.Player.Fire.ReadValue<float>() > 0.1f;
         DashPressed = input.Player.Boost.triggered;
+
+        var swapTriggered = input.Player.SwapWeapon.triggered;
+        var swapDir = input.Player.SwapWeapon.ReadValue<float>();
+        SwapRight = swapTriggered && swapDir > 0.1f;
+        SwapLeft  = swapTriggered && swapDir < -0.1f;
     }
 
-    private void OnEnable()
+    public void OnEnable()
     {
         input.Enable();
     }
 
-    private void OnDisable()
+    public void OnDisable()
     {
         input.Disable();
     }

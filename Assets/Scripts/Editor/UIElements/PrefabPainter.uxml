@@ -1,0 +1,18 @@
+<ui:UXML xmlns:ui="UnityEngine.UIElements" xmlns:uie="UnityEditor.UIElements">
+    <uie:ObjectField label="Prefab Collection" name="PrefabCollection">
+        <Style src="PrefabPainter.uss" />
+    </uie:ObjectField>
+    <uie:ObjectField label="Parent GO" name="Parent">
+        <Style src="PrefabPainter.uss" />
+    </uie:ObjectField>
+    <ui:Foldout text="Foldout">
+        <Style src="PrefabPainter.uss" />
+        <uie:Vector2Field label="Min Size" name="MinSize" x="1" y="1" />
+        <uie:Vector2Field label="MaxSize" name="MaxSize" x="1" y="1" />
+        <uie:FloatField label="Min Rotation" value="0" name="MinRotation" />
+        <uie:FloatField label="Max Rotation" value="0" name="MaxRotation" />
+    </ui:Foldout>
+    <ui:ScrollView style="flex-grow: 1;">
+        <Style src="PrefabPainter.uss" />
+    </ui:ScrollView>
+</ui:UXML>

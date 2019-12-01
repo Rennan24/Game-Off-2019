@@ -15,7 +15,7 @@ public class DashBehaviour : MonoBehaviour
 
     [Header("References:")]
     [SerializeField]
-    private TopdownController controllerRef;
+    private MovementController controllerRef;
 
     [SerializeField]
     private SpriteRenderer spriteRef;

@@ -4,7 +4,7 @@ using UnityEngine;
 public class SpineFaceDirComp : MonoBehaviour
 {
     [SerializeField]
-    private TopdownController controller;
+    private MovementController controller;
 
     [SerializeField]
     private SkeletonAnimation animator;

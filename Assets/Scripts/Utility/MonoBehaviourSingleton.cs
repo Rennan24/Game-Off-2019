@@ -7,16 +7,16 @@ public class MonoBehaviourSingleton<T> : MonoBehaviour where T : MonoBehaviour
     {
         get
         {
-            Assert.IsNotNull(_inst, $"Singleton {typeof(T)} is null!");
-            return _inst;
+            Assert.IsNotNull(inst, $"Singleton {typeof(T)} is null!");
+            return inst;
         }
     }
 
-    private static T _inst;
+    private static T inst;
 
     public virtual void Awake()
     {
-        Assert.IsNull(_inst, $"There are more than one Singleton {typeof(T)}");
-        _inst = GetComponent<T>();
+        Assert.IsNull(inst, $"There are more than one Singleton {typeof(T)}");
+        inst = GetComponent<T>();
     }
 }

@@ -28,8 +28,11 @@ public class DamageBehaviour : MonoBehaviour
             if (health != null)
                 Damage(health);
 
-            if(DestroyOnHit)
+            if (DestroyOnHit)
+            {
                 Destroy(gameObject);
+                break;
+            }
         }
 
     }

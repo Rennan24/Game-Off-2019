@@ -31,8 +31,8 @@ public class HitEffectBehaviour : MonoBehaviour
         block.SetFloat(HitTimeID, hitAmount);
         renderer.SetPropertyBlock(block);
 
-        if (health.IsKilled)
-            return;
+//        if (health.IsKilled)
+//            return;
 
         var decrement = HitEffectSpeed * Time.deltaTime;
         hitAmount = Mathf.Max(hitAmount - decrement, 0);
@@ -44,7 +44,6 @@ public class HitEffectBehaviour : MonoBehaviour
         Vector3 random = Random.insideUnitCircle * 0.5f;
         var newPos = transform.position + offset + random;
 
-        DamageTextManager.Inst.SpawnText(newPos, 1.0f);
         hitAmount = 1.0f;
     }
 

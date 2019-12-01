@@ -1,0 +1,8 @@
+<ui:UXML xmlns:ui="UnityEngine.UIElements" xmlns:uie="UnityEditor.UIElements">
+    <ui:VisualElement style="flex-grow: 1; background-image: url('/Assets/Kenney/EnemySprites/barnacle.png');">
+        <Style src="PrefabCollectionImage.uss" />
+    </ui:VisualElement>
+    <ui:Label text="Label" style="justify-content: flex-start; -unity-text-align: upper-center; -unity-font-style: bold; font-size: 16px;">
+        <Style src="PrefabCollectionImage.uss" />
+    </ui:Label>
+</ui:UXML>

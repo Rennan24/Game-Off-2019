@@ -1,0 +1,167 @@
+
+NightMare Boss.png
+size: 1861,1053
+format: RGBA8888
+filter: Linear,Linear
+repeat: none
+Body
+  rotate: false
+  xy: 1069, 445
+  size: 236, 606
+  orig: 236, 606
+  offset: 0, 0
+  index: -1
+Hair 2
+  rotate: false
+  xy: 1307, 580
+  size: 187, 471
+  orig: 187, 471
+  offset: 0, 0
+  index: -1
+Hair 4
+  rotate: false
+  xy: 1384, 163
+  size: 148, 415
+  orig: 148, 415
+  offset: 0, 0
+  index: -1
+Hair 5
+  rotate: false
+  xy: 1069, 40
+  size: 170, 403
+  orig: 170, 403
+  offset: 0, 0
+  index: -1
+Hair 6
+  rotate: false
+  xy: 1534, 215
+  size: 110, 399
+  orig: 110, 399
+  offset: 0, 0
+  index: -1
+Hair 7
+  rotate: false
+  xy: 1705, 580
+  size: 150, 471
+  orig: 150, 471
+  offset: 0, 0
+  index: -1
+Hair 8
+  rotate: false
+  xy: 1646, 247
+  size: 112, 331
+  orig: 112, 331
+  offset: 0, 0
+  index: -1
+Hair1
+  rotate: false
+  xy: 1496, 616
+  size: 207, 435
+  orig: 207, 435
+  offset: 0, 0
+  index: -1
+Hair3
+  rotate: false
+  xy: 1241, 24
+  size: 141, 419
+  orig: 162, 419
+  offset: 0, 0
+  index: -1
+Head
+  rotate: false
+  xy: 2, 146
+  size: 1065, 905
+  orig: 1067, 907
+  offset: 1, 1
+  index: -1
+L Eye
+  rotate: false
+  xy: 1705, 53
+  size: 93, 74
+  orig: 95, 76
+  offset: 1, 1
+  index: -1
+L Hand
+  rotate: false
+  xy: 1760, 283
+  size: 86, 88
+  orig: 88, 90
+  offset: 1, 1
+  index: -1
+L Lower Arm
+  rotate: true
+  xy: 1760, 477
+  size: 101, 99
+  orig: 103, 101
+  offset: 1, 1
+  index: -1
+L Upper Arm
+  rotate: true
+  xy: 910, 32
+  size: 51, 117
+  orig: 53, 119
+  offset: 1, 1
+  index: -1
+L Weapon
+  rotate: true
+  xy: 2, 17
+  size: 127, 452
+  orig: 129, 454
+  offset: 1, 1
+  index: -1
+L Wing
+  rotate: true
+  xy: 1547, 53
+  size: 160, 156
+  orig: 160, 166
+  offset: 0, 0
+  index: -1
+Layer 1
+  rotate: false
+  xy: 910, 85
+  size: 143, 59
+  orig: 145, 61
+  offset: 1, 1
+  index: -1
+R Eye
+  rotate: true
+  xy: 1307, 485
+  size: 93, 75
+  orig: 95, 77
+  offset: 1, 1
+  index: -1
+R Hand
+  rotate: true
+  xy: 1760, 197
+  size: 84, 88
+  orig: 86, 90
+  offset: 1, 1
+  index: -1
+R Lower Arm copy
+  rotate: true
+  xy: 1760, 373
+  size: 102, 98
+  orig: 104, 100
+  offset: 1, 1
+  index: -1
+R Upper Arm copy
+  rotate: false
+  xy: 1705, 129
+  size: 51, 116
+  orig: 53, 118
+  offset: 1, 1
+  index: -1
+R Weapon
+  rotate: true
+  xy: 456, 17
+  size: 127, 452
+  orig: 129, 454
+  offset: 1, 1
+  index: -1
+R Wing
+  rotate: false
+  xy: 1384, 2
+  size: 161, 159
+  orig: 161, 166
+  offset: 0, 0
+  index: -1
